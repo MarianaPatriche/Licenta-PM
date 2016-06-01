@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "PROJECT")
-public class Project {
+public class Project extends AbstractAuditable{
 
     @Id
     @GeneratedValue(generator = "PROJECT_SEQ_GEN", strategy = GenerationType.SEQUENCE)

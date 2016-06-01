@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "USER_PROJECT")
-public class UserProject {
+public class UserProject extends AbstractAuditable{
 
     @Id
     @GeneratedValue(generator = "USER_PROJECT_SEQ_GEN", strategy = GenerationType.SEQUENCE)

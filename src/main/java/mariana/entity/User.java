@@ -8,8 +8,8 @@ import java.time.LocalDate;
  */
 
 @Entity
-@Table(name = "USER")
-public class User {
+@Table(name = "USERS")
+public class User{
 
     @Id
     @GeneratedValue(generator = "USER_SEQ_GEN", strategy = GenerationType.SEQUENCE)
@@ -38,7 +38,7 @@ public class User {
     private Long workHours;
 
     @Column(name = "vacantion_days")
-    private Long vacatinDays;
+    private Long vacantionDays;
 
     @Column(name = "sick_days")
     private Long sickDays;
@@ -107,12 +107,12 @@ public class User {
         this.workHours = workHours;
     }
 
-    public Long getVacatinDays() {
-        return vacatinDays;
+    public Long getVacantionDays() {
+        return vacantionDays;
     }
 
-    public void setVacatinDays(Long vacatinDays) {
-        this.vacatinDays = vacatinDays;
+    public void setVacantionDays(Long vacantionDays) {
+        this.vacantionDays = vacantionDays;
     }
 
     public Long getSickDays() {
@@ -121,5 +121,11 @@ public class User {
 
     public void setSickDays(Long sickDays) {
         this.sickDays = sickDays;
+    }
+
+    public User(String username, String password, Boolean enabled) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
     }
 }

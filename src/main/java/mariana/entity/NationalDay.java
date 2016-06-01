@@ -8,7 +8,7 @@ import java.time.LocalDate;
  */
 @Entity
 @Table(name = "national_day")
-public class NationalDay {
+public class NationalDay extends AbstractAuditable{
 
     @Id
     @GeneratedValue(generator = "NATIONAL_DAY_SEQ_GEN", strategy = GenerationType.SEQUENCE)
