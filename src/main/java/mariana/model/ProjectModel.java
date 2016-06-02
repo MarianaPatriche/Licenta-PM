@@ -1,42 +1,35 @@
-package mariana.entity;
+package mariana.model;
 
-import org.joda.time.LocalDate;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.*;
-
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 /**
- * Created by mariana on 31.05.2016.
+ * Created by mariana on 01.06.2016.
  */
-
-@Entity
-@Table(name = "PROJECT")
-public class Project extends AbstractAuditable{
-
-    @Id
-    @GeneratedValue(generator = "PROJECT_SEQ_GEN", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "PROJECT_SEQ_GEN", sequenceName = "PROJECT_SEQ")
+public class ProjectModel {
     private Long id;
 
-    @Column(name = "name")
+    @NotEmpty(message = "Campul trebuie completat!")
     private String name;
 
-    @Column(name = "client")
+    @NotEmpty(message = "Campul trebuie completat!")
     private String client;
 
-    @Column(name = "start_date")
-    private LocalDate startDate;
+    @NotNull(message = "Campul trebuie completat!")
+    private String startDate;
 
-    @Column(name = "end_date")
-    private LocalDate endDate;
+    @NotNull(message = "Campul trebuie completat!")
+    private String endDate;
 
-    @Column(name = "color")
+    @NotEmpty(message = "Campul trebuie completat!")
     private String color;
 
-    @Column(name = "hours")
+    @Min(value = 1, message = "Campul trebuie completat!")
     private Long hours;
 
-    @Column(name = "description")
     private String description;
 
     public Long getId() {
@@ -63,19 +56,19 @@ public class Project extends AbstractAuditable{
         this.client = client;
     }
 
-    public LocalDate getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
@@ -105,12 +98,12 @@ public class Project extends AbstractAuditable{
 
     @Override
     public String toString() {
-        return "Project{" +
+        return "ProjectModel{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", client='" + client + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
                 ", color='" + color + '\'' +
                 ", hours=" + hours +
                 ", description='" + description + '\'' +

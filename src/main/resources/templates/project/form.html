@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<!-- start: Header -->
+<div th:replace="fragments/navbar :: navbar"></div>
+<!-- start: Header -->
+
+<div class="container-fluid-full">
+    <div class="row-fluid">
+
+        <!-- start: Main Menu -->
+        <div th:replace="fragments/menu :: menu"></div>
+        <!-- end: Main Menu -->
+
+        <noscript>
+            <div class="alert alert-block span10">
+                <h4 class="alert-heading">Warning!</h4>
+                <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+            </div>
+        </noscript>
+
+        <!-- start: Content -->
+        <div id="content" class="span10">
+
+            <div class="row-fluid sortable">
+                <div class="box span12">
+                    <div class="box-header">
+                        <h2><i class="halflings-icon white edit"></i><span class="break"></span>Adauga un nou proiect!</h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
+                            <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+                            <a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+                        </div>
+                    </div>
+                    <div class="box-content">
+                        <form class="form-horizontal" method="post" th:object="${project}" th:action="@{/project/save}">
+                            <fieldset>
+                                <input type="hidden" th:field="*{id}"/>
+                                <div class="control-group">
+                                    <label class="control-label" for="name">Nume</label>
+                                    <div class="controls">
+                                        <input class="input-xlarge focused" id="name" type="text" th:field="*{name}"/>
+                                    </div>
+                                    <div id="nameError"
+                                         th:if="${#fields.hasErrors('name')}"
+                                         th:errors="*{name}" style="color: red"></div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="client">Client</label>
+                                    <div class="controls">
+                                        <input class="input-xlarge focused" id="client" type="text" th:field="*{client}"/>
+                                    </div>
+                                    <div id="descriptionError"
+                                         th:if="${#fields.hasErrors('client')}"
+                                         th:errors="*{client}" style="color: red"></div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="startDate">Start Date</label>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge datepicker" id="startDate" th:field="*{startDate}"/>
+                                    </div>
+                                    <div id="startDateError"
+                                         th:if="${#fields.hasErrors('startDate')}"
+                                         th:errors="*{startDate}" style="color: red"></div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="startDate">End Date</label>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge datepicker" id="endDate" th:field="*{endDate}"/>
+                                    </div>
+                                    <div id="endDateError"
+                                         th:if="${#fields.hasErrors('endDate')}"
+                                         th:errors="*{endDate}" style="color: red"></div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="hours">Ore de lucru</label>
+                                    <div class="controls">
+                                        <input class="input-xlarge focused" id="hours" type="text" th:field="*{hours}"/>
+                                    </div>
+                                    <div id="hoursError"
+                                         th:if="${#fields.hasErrors('hours')}"
+                                         th:errors="*{hours}" style="color: red"></div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="color">Culoare</label>
+                                    <div class="controls">
+                                        <input class="input-small focused" id="color" type="color" th:field="*{color}"/>
+                                    </div>
+                                    <div id="colorError"
+                                         th:if="${#fields.hasErrors('color')}"
+                                         th:errors="*{color}" style="color: red"></div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="description">Descriere</label>
+                                    <div class="controls">
+                                        <textarea class="focused" id="description" th:field="*{description}">
+                                            </textarea>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Salveaza</button>
+                                    <button class="btn">Renunta</button>
+                                </div>
+                            </fieldset>
+                        </form>
+
+                    </div>
+                </div><!--/span-->
+
+            </div><!--/row-->
+
+        </div><!--/.fluid-container-->
+
+        <!-- end: Content -->
+    </div><!--/#content.span10-->
+</div><!--/fluid-row-->
+
+
+<div class="clearfix"></div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
