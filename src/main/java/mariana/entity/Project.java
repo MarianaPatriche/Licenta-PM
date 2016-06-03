@@ -1,5 +1,6 @@
 package mariana.entity;
 
+import mariana.util.ProjectStatus;
 import org.joda.time.LocalDate;
 
 import javax.persistence.*;
@@ -38,6 +39,10 @@ public class Project extends AbstractAuditable{
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private ProjectStatus status;
 
     public Long getId() {
         return id;
@@ -103,6 +108,14 @@ public class Project extends AbstractAuditable{
         this.description = description;
     }
 
+    public ProjectStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ProjectStatus status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Project{" +
@@ -114,6 +127,7 @@ public class Project extends AbstractAuditable{
                 ", color='" + color + '\'' +
                 ", hours=" + hours +
                 ", description='" + description + '\'' +
+                ", status=" + status +
                 '}';
     }
 }

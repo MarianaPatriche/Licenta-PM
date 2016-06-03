@@ -3,6 +3,7 @@ package mariana.controller;
 import mariana.model.ProjectModel;
 import mariana.repository.ProjectRepository;
 import mariana.service.ProjectService;
+import mariana.util.ProjectStatus;
 import mariana.validator.ProjectValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 
 /**
  * Created by mariana on 01.06.2016.
@@ -27,9 +29,6 @@ public class ProjectController extends BaseController{
     private ProjectService projectService;
 
     @Autowired
-    private ProjectRepository projectRepository;
-
-    @Autowired
     private ProjectValidator projectValidator;
 
     @RequestMapping(value = "/form/{id}", method = RequestMethod.GET)
@@ -40,6 +39,8 @@ public class ProjectController extends BaseController{
         else {
             model.addAttribute("project", new ProjectModel());
         }
+        model.addAttribute("statuses",  Arrays.asList(ProjectStatus.values()));
+
         return "project/form";
     }
 
@@ -56,7 +57,7 @@ public class ProjectController extends BaseController{
 
     @RequestMapping(value = "/list")
     public String projectList(Model model){
-        model.addAttribute("projectList", projectRepository.findAll());
+        model.addAttribute("projectList", projectService.getProjectModelList());
         return "project/list";
     }
 

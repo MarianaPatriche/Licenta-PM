@@ -48,5 +48,12 @@ public class DataUserTest {
 		admin = userRepository.save(admin);
 		UserRole userRoleAdmin = new UserRole(Role.ROLE_ADMIN.name(), admin);
 		userRoleRepository.save(userRoleAdmin);
+
+        User user = new User("user", passwordEncoder.encode("user"), true);
+        user.setFirstName("user");
+        user.setLastName("user");
+        user = userRepository.save(user);
+        UserRole userRole = new UserRole(Role.ROLE_USER.name(), user);
+        userRoleRepository.save(userRole);
     }
 }

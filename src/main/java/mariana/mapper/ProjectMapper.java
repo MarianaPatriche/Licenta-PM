@@ -21,6 +21,7 @@ public class ProjectMapper {
         projectModel.setColor(project.getColor());
         projectModel.setHours(project.getHours());
         projectModel.setDescription(project.getDescription());
+        projectModel.setProjectStatus(project.getStatus());
 
         return projectModel;
     }
@@ -35,6 +36,7 @@ public class ProjectMapper {
         project.setColor(projectModel.getColor());
         project.setHours(projectModel.getHours());
         project.setDescription(projectModel.getDescription());
+        project.setStatus(projectModel.getProjectStatus());
 
         return project;
     }

@@ -57,7 +57,10 @@
                             <td th:text="${#dates.format(project.startDate, 'dd/MMM/yyyy')}"></td>
                             <td th:text="${#dates.format(project.endDate, 'dd/MMM/yyyy')}"></td>
                             <td class="center">
-                                <span class="label label-success">Active</span>
+                                <span th:if="${#strings.toString(project.projectStatus) == 'STARTED'}" class="label label-success">STARTED</span>
+                                <span th:if="${#strings.toString(project.projectStatus) == 'MAINTENANCE'}" class="label label-danger">MAINTENANCE</span>
+                                <span th:if="${#strings.toString(project.projectStatus) == 'DELAYED'}" class="label label-warning">DELAYED</span>
+                                <span th:if="${#strings.toString(project.projectStatus) == 'ENDED'}" class="label">ENDED</span>
                             </td>
                             <td th:text="${project.hours}"></td>
                             <td th:text="${project.description}"></td>

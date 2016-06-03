@@ -128,4 +128,8 @@ public class User{
         this.password = password;
         this.enabled = enabled;
     }
+
+    public User(){
+
+    }
 }

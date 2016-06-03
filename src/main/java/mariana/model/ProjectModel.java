@@ -1,5 +1,6 @@
 package mariana.model;
 
+import mariana.util.ProjectStatus;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Min;
@@ -31,6 +32,8 @@ public class ProjectModel {
     private Long hours;
 
     private String description;
+
+    private ProjectStatus projectStatus;
 
     public Long getId() {
         return id;
@@ -96,6 +99,14 @@ public class ProjectModel {
         this.description = description;
     }
 
+    public ProjectStatus getProjectStatus() {
+        return projectStatus;
+    }
+
+    public void setProjectStatus(ProjectStatus projectStatus) {
+        this.projectStatus = projectStatus;
+    }
+
     @Override
     public String toString() {
         return "ProjectModel{" +
@@ -107,6 +118,7 @@ public class ProjectModel {
                 ", color='" + color + '\'' +
                 ", hours=" + hours +
                 ", description='" + description + '\'' +
+                ", projectStatus=" + projectStatus +
                 '}';
     }
 }
