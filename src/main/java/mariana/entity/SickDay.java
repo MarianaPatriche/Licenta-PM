@@ -1,7 +1,9 @@
 package mariana.entity;
 
+import org.joda.time.LocalDate;
+
 import javax.persistence.*;
-import java.time.LocalDate;
+
 
 /**
  * Created by mariana on 31.05.2016.

@@ -29,4 +29,12 @@ public class ProjectIdNameModel {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "ProjectIdNameModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

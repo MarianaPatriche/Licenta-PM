@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByEnabledTrueAndUsernameContaining(String a);
+
+    User findByUsername(String username);
 }

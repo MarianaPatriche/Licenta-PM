@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface UserProjectRepository extends JpaRepository<UserProject, Long> {
     List<UserProject> findByProjectIdAndStatus(Long projectId, Boolean status);
+
+    List<UserProject> findByUserUsernameAndStatusTrue(String username);
 }

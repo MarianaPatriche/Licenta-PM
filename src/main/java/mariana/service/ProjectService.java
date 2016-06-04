@@ -1,10 +1,13 @@
 package mariana.service;
 
 import mariana.entity.Project;
+import mariana.entity.UserProject;
 import mariana.mapper.ProjectMapper;
 import mariana.model.ProjectIdNameModel;
 import mariana.model.ProjectModel;
 import mariana.repository.ProjectRepository;
+import mariana.repository.UserProjectRepository;
+import mariana.util.Auth;
 import mariana.util.ProjectStatus;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
@@ -23,6 +26,9 @@ import java.util.List;
 public class ProjectService {
     @Autowired
     private ProjectRepository projectRepository;
+
+    @Autowired
+    private UserProjectRepository userProjectRepository;
 
     public void saveProject(ProjectModel projectModel){
 
@@ -72,6 +78,19 @@ public class ProjectService {
 
         for(Project project : projectList){
             ProjectIdNameModel model = new ProjectIdNameModel(project.getId(), project.getName());
+            projectModelList.add(model);
+        }
+
+        return projectModelList;
+    }
+
+    public List<ProjectIdNameModel> findUserProjects(){
+        List<UserProject> userProjectList = userProjectRepository.findByUserUsernameAndStatusTrue(Auth.userLoggedIn());
+        List<ProjectIdNameModel> projectModelList = new ArrayList<>();
+
+        for(UserProject userProject : userProjectList){
+            ProjectIdNameModel model = new ProjectIdNameModel(userProject.getProject().getId(),
+                    userProject.getProject().getName());
             projectModelList.add(model);
         }
 

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<!-- start: Header -->
+<div th:replace="fragments/navbar :: navbar"></div>
+<!-- start: Header -->
+
+<div class="container-fluid-full">
+    <div class="row-fluid">
+
+        <!-- start: Main Menu -->
+        <div th:replace="fragments/menu :: menu"></div>
+        <!-- end: Main Menu -->
+
+        <noscript>
+            <div class="alert alert-block span10">
+                <h4 class="alert-heading">Warning!</h4>
+                <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+            </div>
+        </noscript>
+
+        <!-- start: Content -->
+        <div id="content" class="span10">
+
+            <div class="row-fluid sortable">
+                <div class="box span12">
+                    <div class="box-header">
+                        <h2><i class="halflings-icon white edit"></i><span class="break"></span>Adauga zi libera!</h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
+                            <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+                            <a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+                        </div>
+                    </div>
+                    <div class="box-content">
+                        <form class="form-horizontal" method="post" th:object="${freeDayModel}" th:action="@{/freeDay/save}">
+                            <fieldset>
+
+                                <div class="control-group">
+                                    <label class="control-label">Tip</label>
+                                    <div class="controls">
+                                        <select id="project" th:field="*{type}">
+                                            <option th:each="type : ${dayType}" th:value="${type}"  th:text="${type}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="day">Data</label>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge datepicker" id="day" th:field="*{date}"/>
+                                    </div>
+                                    <div id="dayError"
+                                         th:if="${#fields.hasErrors('date')}"
+                                         th:errors="*{date}" style="color: red"></div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Salveaza</button>
+                                    <button class="btn">Renunta</button>
+                                </div>
+                            </fieldset>
+                        </form>
+
+                    </div>
+                </div><!--/span-->
+
+            </div><!--/row-->
+
+        </div><!--/.fluid-container-->
+
+        <!-- end: Content -->
+    </div><!--/#content.span10-->
+</div><!--/fluid-row-->
+
+
+<div class="clearfix"></div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
