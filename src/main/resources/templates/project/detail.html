@@ -34,6 +34,7 @@
                             <li class="active"><a href="#info">Informatii</a></li>
                             <li><a href="#messages">Specificatii</a></li>
                             <li><a href="#custom">Descriere</a></li>
+                            <li><a href="#team">Echipa</a></li>
                         </ul>
 
                         <div id="myTabContent" class="tab-content">
@@ -75,6 +76,55 @@
                             <div class="tab-pane" id="custom">
                                 <p th:text="${project.description}">
                                 </p>
+                            </div>
+
+                            <div class="tab-pane" id="team">
+                                <div th:if="${not #lists.isEmpty(actualTeam)}" class="box span6" onTablet="span6" onDesktop="span6">
+                                    <div class="box-header">
+                                        <h2><i class="halflings-icon white user"></i><span class="break"></span>Useri activi</h2>
+                                        <div class="box-icon">
+                                            <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+                                            <a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="box-content">
+                                        <ul class="dashboard-list" th:each="user : ${actualTeam}">
+                                            <li style="margin-bottom: 10px">
+                                                <a href="#">
+                                                    <img class="avatar" alt="Dennis Ji" src="img/avatar.jpg"/>
+                                                </a>
+                                                <strong>Nume:</strong> <a href="#" th:text="${user.name}"></a><br/>
+                                                <strong>Data:</strong> <span th:text="${user.startDate}"></span><br/>
+                                                <a class="btn btn-info" th:href="@{/allocate/changeStatus/__${user.allocationId}__}">
+                                                    <i class="halflings-icon white edit"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div><!--/span-->
+                                <div th:if="${not #lists.isEmpty(oldTeam)}" class="box span6" onTablet="span6" onDesktop="span6">
+                                    <div class="box-header">
+                                        <h2><i class="halflings-icon white user"></i><span class="break"></span>Useri inactivi</h2>
+                                        <div class="box-icon">
+                                            <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+                                            <a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="box-content">
+                                        <ul class="dashboard-list" th:each="user : ${oldTeam}">
+                                            <li style="margin-bottom: 10px">
+                                                <a href="#">
+                                                    <img class="avatar" alt="Dennis Ji" src="img/avatar.jpg"/>
+                                                </a>
+                                                <strong>Nume:</strong> <a href="#" th:text="${user.name}"></a><br/>
+                                                <strong>Data:</strong> <span th:text="${user.endDate}"></span><br/>
+                                                <a class="btn btn-info" th:href="@{/allocate/changeStatus/__${user.allocationId}__}">
+                                                    <i class="halflings-icon white edit"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div><!--/span-->
                             </div>
                         </div>
                     </div>

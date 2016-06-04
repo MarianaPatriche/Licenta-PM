@@ -1,12 +1,13 @@
 package mariana.entity;
 
 import mariana.util.Auth;
+import org.joda.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import java.time.LocalDateTime;
+
 
 /**
  * Created by mariana on 30.05.2016.

@@ -2,6 +2,7 @@ package mariana.controller;
 
 import mariana.model.ProjectModel;
 import mariana.repository.ProjectRepository;
+import mariana.service.AllocationService;
 import mariana.service.ProjectService;
 import mariana.util.ProjectStatus;
 import mariana.validator.ProjectValidator;
@@ -30,6 +31,9 @@ public class ProjectController extends BaseController{
 
     @Autowired
     private ProjectValidator projectValidator;
+
+    @Autowired
+    private AllocationService allocationService;
 
     @RequestMapping(value = "/form/{id}", method = RequestMethod.GET)
     public String projectForm(@PathVariable("id") Long id, Model model) {
@@ -64,6 +68,8 @@ public class ProjectController extends BaseController{
     @RequestMapping(value = "/detail/{id}")
     public String projectDetail(@PathVariable("id") Long id , Model model){
         model.addAttribute("project", projectService.getProjectModel(id));
+        model.addAttribute("actualTeam", allocationService.getTeamByProject(id, Boolean.TRUE));
+        model.addAttribute("oldTeam", allocationService.getTeamByProject(id, Boolean.FALSE));
 
         return "project/detail";
     }

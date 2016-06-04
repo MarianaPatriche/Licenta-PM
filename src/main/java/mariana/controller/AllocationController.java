@@ -53,4 +53,11 @@ public class AllocationController extends BaseController {
         allocationService.save(allocationModel);
         return "redirect:/";
     }
+
+    @RequestMapping(value = "/changeStatus/{allocationId}")
+    public String changeAllocationStatus(@PathVariable("allocationId") Long allocationId){
+        Long projectId = allocationService.changeAllocationStatut(allocationId);
+
+        return "redirect:/project/detail/" + projectId;
+    }
 }
