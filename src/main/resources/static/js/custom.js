@@ -110,7 +110,7 @@ $(document).ready(function(){
 	init_masonry();
 	sparkline_charts();
 	charts();
-	calendars();
+	//calendars();
 	growlLikeNotifications();
 	widthFunctions();
 	
@@ -769,7 +769,7 @@ function circle_progess() {
       
 
 /* ---------- Calendars ---------- */
-
+/*
 function calendars(){
 	
 
@@ -939,7 +939,7 @@ function calendars(){
 		}
 	});
 	
-}
+}*/
 
 /* ---------- Sparkline Charts ---------- */
 

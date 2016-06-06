@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<!-- start: Header -->
+<div th:replace="fragments/navbar :: navbar"></div>
+<!-- start: Header -->
+
+<div class="container-fluid-full">
+    <div class="row-fluid">
+
+        <!-- start: Main Menu -->
+        <div th:replace="fragments/menu :: menu"></div>
+        <!-- end: Main Menu -->
+
+        <noscript>
+            <div class="alert alert-block span10">
+                <h4 class="alert-heading">Warning!</h4>
+                <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+            </div>
+        </noscript>
+
+        <div id="content" class="span10">
+        <div class="row-fluid sortable">
+            <div class="box span12">
+                <div class="box-content">
+                    <div id="calendar" class="span9"></div>
+                </div>
+            </div>
+        </div><!--/row-->
+
+        <!-- end: Content -->
+    </div><!--/#content.span10-->
+        </div>
+</div><!--/fluid-row-->
+
+
+<div class="clearfix"></div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        loadCalendar();
+        $('.fc-button').on('click', function () {
+            setTimeout(function () {
+                var source = {
+                    data: {
+                        date: '01/' + ($('#calendar').fullCalendar('getDate').getMonth() + 1)  +
+                                '/' + $('#calendar').fullCalendar('getDate').getFullYear()
+                    },
+                    url: '/calendar/projects/data'
+                };
+                $('#calendar').fullCalendar('removeEventSource', '/calendar/projects/data');
+                $('#calendar').fullCalendar('addEventSource', source);
+            },100);
+        });
+    });
+
+    function loadCalendar() {
+        $('#calendar').fullCalendar({
+            lang: "ro",
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            events: {
+                url: '/calendar/projects/data',
+                error: function() {
+                    $('#script-warning').show();
+                }
+            },
+            loading: function(bool) {
+                $('#loading').toggle(bool);
+            }
+        });
+    }
+
+
+</script>
+</body>
+</html>
