@@ -1,6 +1,7 @@
 package mariana.service;
 
 import mariana.entity.SickDay;
+import mariana.entity.User;
 import mariana.entity.VacantionDay;
 import mariana.model.FreeDayModel;
 import mariana.repository.SickDayRepository;
@@ -40,17 +41,25 @@ public class FreeDayService {
     }
 
     private void saveSickDay(FreeDayModel freeDayModel){
+        User user = userRepository.findByUsername(Auth.userLoggedIn());
         SickDay sickDay = new SickDay();
         sickDay.setDay(LocalDate.parse(freeDayModel.getDate(), DateTimeFormat.forPattern("dd/MM/yy")));
-        sickDay.setUser(userRepository.findByUsername(Auth.userLoggedIn()));
+        sickDay.setUser(user);
+
+        user.setSickDays(user.getSickDays() - 1);
+        userRepository.save(user);
 
         sickDayRepository.save(sickDay);
     }
 
     private void saveVacationDay(FreeDayModel freeDayModel){
+        User user = userRepository.findByUsername(Auth.userLoggedIn());
         VacantionDay vacationDay = new VacantionDay();
         vacationDay.setDay(LocalDate.parse(freeDayModel.getDate(), DateTimeFormat.forPattern("dd/MM/yy")));
-        vacationDay.setUser(userRepository.findByUsername(Auth.userLoggedIn()));
+        vacationDay.setUser(user);
+
+        user.setVacantionDays(user.getVacantionDays() - 1);
+        userRepository.save(user);
 
         vacantionDayRepository.save(vacationDay);
     }
