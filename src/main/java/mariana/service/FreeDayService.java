@@ -46,7 +46,7 @@ public class FreeDayService {
         sickDay.setDay(LocalDate.parse(freeDayModel.getDate(), DateTimeFormat.forPattern("dd/MM/yy")));
         sickDay.setUser(user);
 
-        user.setSickDays(user.getSickDays() - 1);
+        user.getEmployee().setSickDays(user.getEmployee().getSickDays() - 1);
         userRepository.save(user);
 
         sickDayRepository.save(sickDay);
@@ -58,7 +58,7 @@ public class FreeDayService {
         vacationDay.setDay(LocalDate.parse(freeDayModel.getDate(), DateTimeFormat.forPattern("dd/MM/yy")));
         vacationDay.setUser(user);
 
-        user.setVacantionDays(user.getVacantionDays() - 1);
+        user.getEmployee().setVacantionDays(user.getEmployee().getVacantionDays() - 1);
         userRepository.save(user);
 
         vacantionDayRepository.save(vacationDay);

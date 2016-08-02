@@ -34,12 +34,12 @@ public class VacationDayValidator implements Validator{
         User user = userRepository.findByUsername(Auth.userLoggedIn());
         FreeDayModel freeDayModel = (FreeDayModel) o;
         if(freeDayModel.getType().equals(FreeDayType.VACATION_DAY)){
-            if (user.getVacantionDays() < 1) {
+            if (user.getEmployee().getVacantionDays() < 1) {
                 errors.rejectValue("date", "vacationDays.zero");
             }
         }
         else{
-            if (user.getSickDays() < 1) {
+            if (user.getEmployee().getSickDays() < 1) {
                 errors.rejectValue("date", "sickDays.zero");
             }
         }

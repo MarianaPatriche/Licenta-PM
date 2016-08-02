@@ -46,7 +46,7 @@ public class AllocationService {
         List<AllocationUserModel> modelList = new ArrayList<>();
         for(UserProject userProject : userProjectList){
             AllocationUserModel model = new AllocationUserModel();
-            model.setName(userProject.getUser().getFirstName() + " " + userProject.getUser().getLastName());
+            model.setName(userProject.getUser().getEmployee().getFirstName() + " " + userProject.getUser().getEmployee().getLastName());
             model.setStartDate(userProject.getCreatedDate().toString("dd/mm/yyyy"));
             model.setEndDate(userProject.getLastUpdateDate().toString("dd/mm/yyyy"));
             model.setAllocationId(userProject.getId());

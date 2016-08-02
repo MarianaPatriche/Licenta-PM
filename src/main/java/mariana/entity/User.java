@@ -16,12 +16,6 @@ public class User{
     @SequenceGenerator(name = "USER_SEQ_GEN", sequenceName = "USER_SEQ")
     private Long id;
 
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
-
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
-
     @Column(name = "username", nullable = false)
     private String username;
 
@@ -31,17 +25,9 @@ public class User{
     @Column(name = "enabled")
     private Boolean enabled;
 
-    @Column(name = "date_of_employment")
-    private LocalDate dateOfEmployment;
-
-    @Column(name = "work_hours")
-    private Long workHours;
-
-    @Column(name = "vacantion_days")
-    private Long vacantionDays;
-
-    @Column(name = "sick_days")
-    private Long sickDays;
+    @OneToOne
+    @JoinColumn(name = "EMPLOYEE_ID")
+    private Employee employee;
 
     public Long getId() {
         return id;
@@ -51,28 +37,12 @@ public class User{
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getPassword() {
@@ -91,45 +61,20 @@ public class User{
         this.enabled = enabled;
     }
 
-    public LocalDate getDateOfEmployment() {
-        return dateOfEmployment;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setDateOfEmployment(LocalDate dateOfEmployment) {
-        this.dateOfEmployment = dateOfEmployment;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
-    public Long getWorkHours() {
-        return workHours;
-    }
-
-    public void setWorkHours(Long workHours) {
-        this.workHours = workHours;
-    }
-
-    public Long getVacantionDays() {
-        return vacantionDays;
-    }
-
-    public void setVacantionDays(Long vacantionDays) {
-        this.vacantionDays = vacantionDays;
-    }
-
-    public Long getSickDays() {
-        return sickDays;
-    }
-
-    public void setSickDays(Long sickDays) {
-        this.sickDays = sickDays;
-    }
-
-    public User(String username, String password, Boolean enabled) {
-        this.username = username;
+    public User(String password, String username, Boolean enabled) {
         this.password = password;
+        this.username = username;
         this.enabled = enabled;
     }
 
-    public User(){
-
+    public User() {
     }
 }
