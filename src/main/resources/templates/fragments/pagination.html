@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="paginationbar(urlBase)">
+    <div class="pagination pagination-right">
+        <ul>
+            <li th:with="disable=${page.first}" th:class="${disable} ? 'disabled' : ''" >
+                <a th:if="${disable}" href="#"><span >First</span></a>
+                <a th:if="${not disable}" th:href="@{${urlBase}(page=0, size=${page.size})}">First</a>
+            </li>
+
+            <li th:with="disable=${not page.hasPrevious()}" th:class="${disable} ? 'disabled' : ''">
+                <a th:if="${disable}" href="#"><span>Previous</span></a>
+                <a th:if="${not disable}" th:href="@{${urlBase}(page=${page.number - 1}, size=${page.size})}">Previous</a>
+            </li>
+
+            <!-- <li th:each="pageNumber : ${#numbers.sequence(1, __${page.totalPages}__)}"
+                 th:with="disable=${pageNumber} eq ${page.number + 1}"
+                 th:class="${disable} ? 'active' : ''">
+                 <a th:if="${disable}"  href="#"><span th:text="${pageNumber}">1</span></a>
+                 <a th:if="${not disable}"
+                    th:href="@{${urlBase}(page=${pageNumber - 1}, size=${page.size})}">
+                     <span th:text="${pageNumber}">1</span>
+                 </a>
+             </li>-->
+
+            <li th:if="${page.number - 2 gt 0}">
+                <a th:href="@{${urlBase}(page=${page.number - 3}, size=${page.size})}">
+                    <span th:text="${page.number - 2}">1</span>
+                </a>
+            </li>
+
+
+            <li th:if="${page.number - 1 gt 0}">
+                <a th:href="@{${urlBase}(page=${page.number - 2}, size=${page.size})}">
+                    <span th:text="${page.number - 1}">1</span>
+                </a>
+            </li>
+
+            <li th:if="${page.number gt 0}">
+                <a th:href="@{${urlBase}(page=${page.number - 1}, size=${page.size})}">
+                    <span th:text="${page.number}">1</span>
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="#" disabled="disabled" ><span th:text="${page.number + 1 }">1</span></a>
+            </li>
+
+            <li th:if="${page.number + 2 le page.totalPages}">
+                <a th:href="@{${urlBase}(page=${page.number + 1}, size=${page.size})}">
+                    <span th:text="${page.number+2}">1</span>
+                </a>
+            </li>
+
+            <li th:if="${page.number + 3 le page.totalPages}">
+                <a th:href="@{${urlBase}(page=${page.number + 2}, size=${page.size})}">
+                    <span th:text="${page.number + 3}">1</span>
+                </a>
+            </li>
+
+            <li th:if="${page.number + 4 le page.totalPages}">
+                <a th:href="@{${urlBase}(page=${page.number + 3}, size=${page.size})}">
+                    <span th:text="${page.number + 4}">1</span>
+                </a>
+            </li>
+
+
+            <li th:with="disable=${not page.hasNext()}" th:class="${disable} ? 'disabled' : ''">
+                <a th:if="${disable}" href="#"><span >Next</span></a>
+                <a th:if="${not disable}"
+                   th:href="@{${urlBase}(page=${page.number + 1}, size=${page.size})}">Next</a>
+            </li>
+
+            <li th:with="disable=${page.last}" th:class="${disable} ? 'disabled' : ''">
+                <a th:if="${disable}" href="#"><span>Last</span></a>
+                <a th:if="${not disable}"
+                   th:href="@{${urlBase}(page=${page.totalPages - 1}, size=${page.size})}">Last</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
+

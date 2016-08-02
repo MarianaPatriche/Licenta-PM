@@ -7,6 +7,7 @@ import mariana.service.ProjectService;
 import mariana.util.ProjectStatus;
 import mariana.validator.ProjectValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.Arrays;
@@ -60,8 +62,9 @@ public class ProjectController extends BaseController{
     }
 
     @RequestMapping(value = "/list")
-    public String projectList(Model model){
-        model.addAttribute("projectList", projectService.getProjectModelList());
+    public String projectList(Model model, @RequestParam(value = "page", required = true, defaultValue = "0") int page,
+                              @RequestParam(value = "size", required = true, defaultValue = "2") int size){
+        model.addAttribute("page", projectService.getProjectModelList(new PageRequest(page, size)));
         return "project/list";
     }
 

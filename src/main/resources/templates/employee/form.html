@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<!-- start: Header -->
+<div th:replace="fragments/navbar :: navbar"></div>
+<!-- start: Header -->
+
+<div class="container-fluid-full">
+    <div class="row-fluid">
+
+        <!-- start: Main Menu -->
+        <div th:replace="fragments/menu :: menu"></div>
+        <!-- end: Main Menu -->
+
+        <noscript>
+            <div class="alert alert-block span10">
+                <h4 class="alert-heading">Warning!</h4>
+                <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+            </div>
+        </noscript>
+
+        <!-- start: Content -->
+        <div id="content" class="span10">
+
+            <div class="row-fluid sortable">
+                <div class="box span12">
+                    <div class="box-header">
+                        <h2><i class="halflings-icon white edit"></i><span class="break"></span>Adauga un angajat nou!</h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
+                            <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+                            <a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+                        </div>
+                    </div>
+                    <div class="box-content">
+                        <form class="form-horizontal" method="post" th:object="${employeeModel}" th:action="@{/employee/save}">
+                            <fieldset>
+                                <input type="hidden" th:field="*{id}"/>
+                                <div class="control-group">
+                                    <label class="control-label" for="lastName">Nume</label>
+                                    <div class="controls">
+                                        <input class="input-xlarge focused" id="lastName" type="text" th:field="*{lastName}"/>
+                                    </div>
+                                    <div id="nameError"
+                                         th:if="${#fields.hasErrors('lastName')}"
+                                         th:errors="*{name}" style="color: red"></div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="firstName">Prenume</label>
+                                    <div class="controls">
+                                        <input class="input-xlarge focused" id="firstName" type="text" th:field="*{firstName}"/>
+                                    </div>
+                                    <div id="descriptionError"
+                                         th:if="${#fields.hasErrors('firstName')}"
+                                         th:errors="*{firstName}" style="color: red"></div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="dateOfEmployment">Data angajarii</label>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge datepicker" id="dateOfEmployment" th:field="*{dateOfEmployment}"/>
+                                    </div>
+                                    <div id="startDateError"
+                                         th:if="${#fields.hasErrors('dateOfEmployment')}"
+                                         th:errors="*{dateOfEmployment}" style="color: red"></div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="workHours">Nr de ore pe saptamana</label>
+                                    <div class="controls">
+                                        <input type="number" class="input-xlarge" id="workHours" th:field="*{workHours}"/>
+                                    </div>
+                                    <div id="endDateError"
+                                         th:if="${#fields.hasErrors('workHours')}"
+                                         th:errors="*{workHours}" style="color: red"></div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Salveaza</button>
+                                    <button class="btn">Renunta</button>
+                                </div>
+                            </fieldset>
+                        </form>
+
+                    </div>
+                </div><!--/span-->
+
+            </div><!--/row-->
+
+        </div><!--/.fluid-container-->
+
+        <!-- end: Content -->
+    </div><!--/#content.span10-->
+</div><!--/fluid-row-->
+
+
+<div class="clearfix"></div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

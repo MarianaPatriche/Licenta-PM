@@ -12,6 +12,8 @@ import mariana.util.ProjectStatus;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,15 +63,15 @@ public class ProjectService {
         return ProjectMapper.toProjectModel(projectRepository.findOne(id));
     }
 
-    public List<ProjectModel> getProjectModelList(){
-        List<ProjectModel> projectModelList = new ArrayList<>();
-        List<Project> projectList = projectRepository.findAll();
+    public Page<Project> getProjectModelList(PageRequest pageRequest){
+      //  List<ProjectModel> projectModelList = new ArrayList<>();
+        Page<Project> projectList = projectRepository.findAll(pageRequest);
 
-        for(Project project : projectList) {
+      /*  for(Project project : projectList) {
             projectModelList.add(ProjectMapper.toProjectModel(project));
-        }
+        }*/
 
-        return projectModelList;
+        return projectList;
     }
 
     public List<ProjectIdNameModel> getNotEndedProjectIdNameList(){
