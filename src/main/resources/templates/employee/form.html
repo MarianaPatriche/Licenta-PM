@@ -44,7 +44,7 @@
                                     </div>
                                     <div id="nameError"
                                          th:if="${#fields.hasErrors('lastName')}"
-                                         th:errors="*{name}" style="color: red"></div>
+                                         th:errors="*{lastName}" style="color: red"></div>
                                 </div>
 
                                 <div class="control-group">
@@ -72,9 +72,39 @@
                                     <div class="controls">
                                         <input type="number" class="input-xlarge" id="workHours" th:field="*{workHours}"/>
                                     </div>
-                                    <div id="endDateError"
+                                    <div id="workHoursError"
                                          th:if="${#fields.hasErrors('workHours')}"
                                          th:errors="*{workHours}" style="color: red"></div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="email">Email</label>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge" id="email" th:field="*{email}"/>
+                                    </div>
+                                    <div id="emailError"
+                                         th:if="${#fields.hasErrors('email')}"
+                                         th:errors="*{email}" style="color: red"></div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="vacantionDays">Zile de concediu</label>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge" id="vacantionDays" th:field="*{vacantionDays}"/>
+                                    </div>
+                                    <div id="freeDaysError"
+                                         th:if="${#fields.hasErrors('vacantionDays')}"
+                                         th:errors="*{vacantionDays}" style="color: red"></div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="birthday">Data nasterii</label>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge datepicker" id="birthday" th:field="*{birthday}"/>
+                                    </div>
+                                    <div id="birthdayError"
+                                         th:if="${#fields.hasErrors('birthday')}"
+                                         th:errors="*{birthday}" style="color: red"></div>
                                 </div>
 
                                 <div class="form-actions">

@@ -2,14 +2,14 @@ package mariana.controller;
 
 import mariana.model.ProjectCalendarModel;
 import mariana.service.CalendarService;
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
+import mariana.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -29,9 +29,9 @@ public class CalendarController extends BaseController{
 
     @RequestMapping("/projects/data")
     @ResponseBody
-    public List<ProjectCalendarModel> getProjectCalendarData(@RequestParam(name = "date", required = false) String date){
+    public List<ProjectCalendarModel> getProjectCalendarData(@RequestParam(name = "date", required = false) String date) throws Exception{
         if(date != null) {
-            return calendarService.getProjectCalendarForUser(LocalDate.parse(date, DateTimeFormat.forPattern("dd/MM/yy")));
+            return calendarService.getProjectCalendarForUser(DateUtils.toLocalDate(date));
         }
         return calendarService.getProjectCalendarForUser(LocalDate.now());
     }

@@ -8,11 +8,13 @@ import mariana.repository.SickDayRepository;
 import mariana.repository.VacantionDayRepository;
 import mariana.repository.WorkDayRepository;
 import mariana.util.Auth;
-import org.joda.time.LocalDate;
+import mariana.util.DateUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class CalendarService {
     @Autowired
     private SickDayRepository sickDayRepository;
 
-    public List<ProjectCalendarModel> getProjectCalendarForUser(LocalDate localDate){
+    public List<ProjectCalendarModel> getProjectCalendarForUser(LocalDate localDate) throws Exception{
         List<ProjectCalendarModel> finalList = new ArrayList<>();
         finalList.addAll(getWorkDays(localDate));
         finalList.addAll(getSickDays(localDate));
@@ -41,8 +43,8 @@ public class CalendarService {
         return finalList;
     }
 
-    private List<ProjectCalendarModel> getWorkDays(LocalDate date){
-        List<WorkDay> workDays = workDayRepository.findByUserUsernameAndDayBetween(
+    private List<ProjectCalendarModel> getWorkDays(LocalDate date) throws Exception{
+        List<WorkDay> workDays = workDayRepository.findByEmployeeUserUsernameAndDayBetween(
                 Auth.userLoggedIn(), date.minusMonths(1), date.plusMonths(1));
 
         List<ProjectCalendarModel> finalList = new ArrayList<>();
@@ -52,7 +54,7 @@ public class CalendarService {
 
             model.setBackgroundColor(workDay.getProject().getColor());
             model.setId(workDay.getProject().getId());
-            model.setStart(workDay.getDay().toString("yyyy-MM-dd"));
+            model.setStart(DateUtils.dateToString(workDay.getDay()));
             model.setTitle(workDay.getProject().getName());
             model.setUrl("/project/detail/" + workDay.getProject().getId());
             model.setBorderColor(workDay.getProject().getColor());
@@ -62,8 +64,8 @@ public class CalendarService {
         return finalList;
     }
 
-    private List<ProjectCalendarModel> getVacationDays(LocalDate date){
-        List<VacantionDay> vacationDays = vacantionDayRepository.findByUserUsernameAndDayBetween(
+    private List<ProjectCalendarModel> getVacationDays(LocalDate date) throws Exception{
+        List<VacantionDay> vacationDays = vacantionDayRepository.findByEmployeeUserUsernameAndDayBetween(
                 Auth.userLoggedIn(), date.minusMonths(1), date.plusMonths(1));
 
         List<ProjectCalendarModel> finalList = new ArrayList<>();
@@ -72,7 +74,7 @@ public class CalendarService {
             ProjectCalendarModel model = new ProjectCalendarModel();
 
             model.setBackgroundColor("#eeeeee");
-            model.setStart(vacantionDay.getDay().toString("yyyy-MM-dd"));
+            model.setStart(DateUtils.dateToString(vacantionDay.getDay()));
             model.setTitle("Concediu");
             model.setBorderColor("#bbbbbb");
 
@@ -81,8 +83,8 @@ public class CalendarService {
         return finalList;
     }
 
-    private List<ProjectCalendarModel> getSickDays(LocalDate date){
-        List<SickDay> sickDays = sickDayRepository.findByUserUsernameAndDayBetween(
+    private List<ProjectCalendarModel> getSickDays(LocalDate date) throws Exception{
+        List<SickDay> sickDays = sickDayRepository.findByEmployeeUserUsernameAndDayBetween(
                 Auth.userLoggedIn(), date.minusMonths(1), date.plusMonths(1));
 
         List<ProjectCalendarModel> finalList = new ArrayList<>();
@@ -91,7 +93,7 @@ public class CalendarService {
             ProjectCalendarModel model = new ProjectCalendarModel();
 
             model.setBackgroundColor("#8B0000");
-            model.setStart(sickDay.getDay().toString("yyyy-MM-dd"));
+            model.setStart(DateUtils.dateToString(sickDay.getDay()));
             model.setTitle("Sick day");
             model.setBorderColor("#8B0000");
 

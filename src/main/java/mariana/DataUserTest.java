@@ -50,20 +50,22 @@ public class DataUserTest {
         Employee adminEmployee = new Employee();
         adminEmployee.setFirstName("Admin");
         adminEmployee.setLastName("admin");
-        adminEmployee = employeeRepository.save(adminEmployee);
+
 		User admin = new User("admin", passwordEncoder.encode("admin"), true);
-        admin.setEmployee(adminEmployee);
 		admin = userRepository.save(admin);
+        adminEmployee.setUser(admin);
+        adminEmployee = employeeRepository.save(adminEmployee);
 		UserRole userRoleAdmin = new UserRole(Role.ROLE_ADMIN.name(), admin);
 		userRoleRepository.save(userRoleAdmin);
 
         Employee userEmployee = new Employee();
         userEmployee.setFirstName("USER");
         userEmployee.setLastName("user");
-        userEmployee = employeeRepository.save(userEmployee);
+
         User user = new User("user", passwordEncoder.encode("user"), true);
-        user.setEmployee(userEmployee);
         user = userRepository.save(user);
+        userEmployee.setUser(user);
+        userEmployee = employeeRepository.save(userEmployee);
         UserRole userRole = new UserRole(Role.ROLE_USER.name(), user);
         userRoleRepository.save(userRole);
     }

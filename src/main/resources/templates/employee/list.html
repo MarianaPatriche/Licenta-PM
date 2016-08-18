@@ -28,7 +28,7 @@
             <div class="row-fluid sortable">
                 <div class="box span12">
                     <div class="box-header">
-                        <h2><i class="halflings-icon white employee"></i><span class="break"></span>Proiecte
+                        <h2><i class="halflings-icon white employee"></i><span class="break"></span>Angajati
                         </h2>
 
                         <div class="box-icon">
@@ -46,42 +46,31 @@
                                 <thead>
                                 <tr>
                                     <th>Nume</th>
-                                    <th>Client</th>
-                                    <th>Data incepere</th>
-                                    <th>Data incheiere</th>
-                                    <th>Status</th>
-                                    <th>Ore</th>
-                                    <th>Descriere</th>
-                                    <th>Culoare</th>
-                                    <th>Actiuni</th>
+                                    <th>Prenume</th>
+                                    <th>Data angajarii</th>
+                                    <th>Norma</th>
+                                    <th>Concediu</th>
+                                    <th>Medical</th>
+                                    <th>Email</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="project : ${page.content}">
-                                    <td th:text="${project.name}"></td>
-                                    <td th:text="${project.client}"></td>
-                                    <td th:text="${#temporals.format(project.startDate, 'dd/MM/yyyy')}"></td>
-                                    <td th:text="${#temporals.format(project.endDate, 'dd/MM/yyyy')}"></td>
-                                    <td class="center">
-                                        <span th:if="${#strings.toString(project.status) == 'STARTED'}"
-                                              class="label label-success">STARTED</span>
-                                        <span th:if="${#strings.toString(project.status) == 'MAINTENANCE'}"
-                                              class="label label-danger">MAINTENANCE</span>
-                                        <span th:if="${#strings.toString(project.status) == 'DELAYED'}"
-                                              class="label label-warning">DELAYED</span>
-                                        <span th:if="${#strings.toString(project.status) == 'ENDED'}"
-                                              class="label">ENDED</span>
-                                    </td>
-                                    <td th:text="${project.hours}"></td>
-                                    <td th:text="${project.description}"></td>
-                                    <td th:text="${project.color}"></td>
+                                <tr th:each="employee : ${page.content}">
+                                    <td th:text="${employee.lastName}"></td>
+                                    <td th:text="${employee.firstName}"></td>
+                                    <td th:text="${employee.dateOfEmployment}"></td>
+                                    <td th:text="${employee.workHours}"></td>
+                                    <td th:text="${employee.vacantionDays}"></td>
+                                    <td th:text="${employee.sickDays}"></td>
+                                    <td th:text="${employee.email}"></td>
                                     <td class="center">
                                         <a class="btn btn-success"
-                                           th:href="@{/project/detail/__${project.id}__}">
+                                           th:href="@{/employee/detail/__${employee.id}__}">
                                             <i class="halflings-icon white zoom-in"></i>
                                         </a>
                                         <a class="btn btn-info"
-                                           th:href="@{/project/form/__${project.id}__}">
+                                           th:href="@{/employee/form/__${employee.id}__}">
                                             <i class="halflings-icon white edit"></i>
                                         </a>
                                         <a class="btn btn-danger" href="#">
@@ -91,7 +80,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <div th:include="fragments/pagination :: paginationbar('/project/list')"></div>
+                            <div th:include="fragments/pagination :: paginationbar('/employee/list')"></div>
                         </div>
                         <div th:if="${#lists.isEmpty(page.content)}">
                             <h2>No Projects found</h2>

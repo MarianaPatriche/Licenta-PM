@@ -1,9 +1,9 @@
 package mariana.entity;
 
 import mariana.util.ProjectStatus;
-import org.joda.time.LocalDate;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 
 /**

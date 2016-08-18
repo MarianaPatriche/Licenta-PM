@@ -6,12 +6,12 @@ import javax.persistence.*;
  * Created by mariana on 31.05.2016.
  */
 @Entity
-@Table(name = "USER_PROJECT")
-public class UserProject extends AbstractAuditable{
+@Table(name = "EMPLOYEE_PROJECT")
+public class EmployeeProject extends AbstractAuditable{
 
     @Id
-    @GeneratedValue(generator = "USER_PROJECT_SEQ_GEN", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "USER_PROJECT_SEQ_GEN", sequenceName = "USER_PROJECT_SEQ")
+    @GeneratedValue(generator = "EMPLOYEE_PROJECT_SEQ_GEN", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "EMPLOYEE_PROJECT_SEQ_GEN", sequenceName = "EMPLOYEE_PROJECT_SEQ")
     private Long id;
 
     @ManyToOne
@@ -19,8 +19,8 @@ public class UserProject extends AbstractAuditable{
     private Project project;
 
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
-    private User user;
+    @JoinColumn(name = "EMPLOYEE_ID")
+    private Employee employee;
 
     @Column(name = "STATUS")
     private Boolean status;
@@ -41,12 +41,12 @@ public class UserProject extends AbstractAuditable{
         this.project = project;
     }
 
-    public User getUser() {
-        return user;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public Boolean getStatus() {

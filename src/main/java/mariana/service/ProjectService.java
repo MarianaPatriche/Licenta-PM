@@ -1,16 +1,15 @@
 package mariana.service;
 
 import mariana.entity.Project;
-import mariana.entity.UserProject;
+import mariana.entity.EmployeeProject;
 import mariana.mapper.ProjectMapper;
 import mariana.model.ProjectIdNameModel;
 import mariana.model.ProjectModel;
 import mariana.repository.ProjectRepository;
-import mariana.repository.UserProjectRepository;
+import mariana.repository.EmployeeProjectRepository;
 import mariana.util.Auth;
+import mariana.util.DateUtils;
 import mariana.util.ProjectStatus;
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,7 +29,7 @@ public class ProjectService {
     private ProjectRepository projectRepository;
 
     @Autowired
-    private UserProjectRepository userProjectRepository;
+    private EmployeeProjectRepository employeeProjectRepository;
 
     public void saveProject(ProjectModel projectModel){
 
@@ -43,8 +42,8 @@ public class ProjectService {
             project.setName(projectModel.getName());
             project.setClient(projectModel.getClient());
             project.setDescription(projectModel.getDescription());
-            project.setStartDate(LocalDate.parse(projectModel.getStartDate(), DateTimeFormat.forPattern("dd/MM/yy")));
-            project.setStartDate(LocalDate.parse(projectModel.getEndDate(), DateTimeFormat.forPattern("dd/MM/yy")));
+            project.setStartDate(DateUtils.toLocalDate(projectModel.getStartDate()));
+            project.setStartDate(DateUtils.toLocalDate(projectModel.getEndDate()));
             project.setHours(projectModel.getHours());
             project.setColor(projectModel.getColor());
             project.setStatus(projectModel.getProjectStatus());
@@ -53,23 +52,18 @@ public class ProjectService {
         projectRepository.save(project);
     }
 
-    public ProjectModel getProjectModel(Long id){
+    public ProjectModel getProjectModel(Long id) throws Exception{
         Project project = projectRepository.findOne(id);
 
         return ProjectMapper.toProjectModel(project);
     }
 
-    public ProjectModel findProject(Long id){
+    public ProjectModel findProject(Long id) throws Exception{
         return ProjectMapper.toProjectModel(projectRepository.findOne(id));
     }
 
-    public Page<Project> getProjectModelList(PageRequest pageRequest){
-      //  List<ProjectModel> projectModelList = new ArrayList<>();
+    public Page<Project> getProjectList(PageRequest pageRequest){
         Page<Project> projectList = projectRepository.findAll(pageRequest);
-
-      /*  for(Project project : projectList) {
-            projectModelList.add(ProjectMapper.toProjectModel(project));
-        }*/
 
         return projectList;
     }
@@ -87,12 +81,12 @@ public class ProjectService {
     }
 
     public List<ProjectIdNameModel> findUserProjects(){
-        List<UserProject> userProjectList = userProjectRepository.findByUserUsernameAndStatusTrue(Auth.userLoggedIn());
+        List<EmployeeProject> employeeProjectList = employeeProjectRepository.findByEmployeeUserUsernameAndStatusTrue(Auth.userLoggedIn());
         List<ProjectIdNameModel> projectModelList = new ArrayList<>();
 
-        for(UserProject userProject : userProjectList){
-            ProjectIdNameModel model = new ProjectIdNameModel(userProject.getProject().getId(),
-                    userProject.getProject().getName());
+        for(EmployeeProject employeeProject : employeeProjectList){
+            ProjectIdNameModel model = new ProjectIdNameModel(employeeProject.getProject().getId(),
+                    employeeProject.getProject().getName());
             projectModelList.add(model);
         }
 

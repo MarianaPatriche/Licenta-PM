@@ -1,14 +1,8 @@
 package mariana.entity;
 
-import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
 
 /**
  * Created by mariana on 02.08.2016.
@@ -39,6 +33,16 @@ public class Employee{
 
 	@Column(name = "sick_days")
 	private Long sickDays;
+
+	@Column(name = "email")
+	private String email;
+
+	@Column(name = "birthday")
+	private LocalDate birthday;
+
+	@OneToOne
+	@JoinColumn(name = "USER_ID")
+	private User user;
 
 	public Long getId() {
 		return id;
@@ -94,5 +98,29 @@ public class Employee{
 
 	public void setSickDays(Long sickDays) {
 		this.sickDays = sickDays;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public LocalDate getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(LocalDate birthday) {
+		this.birthday = birthday;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

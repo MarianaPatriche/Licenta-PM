@@ -1,8 +1,7 @@
 package mariana.entity;
 
-import org.joda.time.LocalDate;
-
 import javax.persistence.*;
+import java.time.LocalDate;
 
 
 /**
@@ -18,8 +17,8 @@ public class VacantionDay {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
-    private User user;
+    @JoinColumn(name = "EMPLOYEE_ID")
+    private Employee employee;
 
     @Column(name = "day")
     private LocalDate day;
@@ -32,12 +31,12 @@ public class VacantionDay {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public LocalDate getDay() {

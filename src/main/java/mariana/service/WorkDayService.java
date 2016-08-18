@@ -1,14 +1,12 @@
 package mariana.service;
 
-import mariana.entity.User;
 import mariana.entity.WorkDay;
 import mariana.model.WorkDayModel;
+import mariana.repository.EmployeeRepository;
 import mariana.repository.ProjectRepository;
-import mariana.repository.UserRepository;
 import mariana.repository.WorkDayRepository;
 import mariana.util.Auth;
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
+import mariana.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +23,7 @@ public class WorkDayService {
     private WorkDayRepository workDayRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private EmployeeRepository employeeRepository;
 
     @Autowired
     private ProjectRepository projectRepository;
@@ -33,9 +31,9 @@ public class WorkDayService {
     public void save(WorkDayModel workDayModel){
         WorkDay workDay = new WorkDay();
 
-        workDay.setUser(userRepository.findByUsername(Auth.userLoggedIn()));
+        workDay.setEmployee(employeeRepository.findByUserUsername(Auth.userLoggedIn()));
         workDay.setProject(projectRepository.findOne(workDayModel.getProjectId()));
-        workDay.setDay(LocalDate.parse(workDayModel.getDay(), DateTimeFormat.forPattern("dd/MM/yy")));
+        workDay.setDay(DateUtils.toLocalDate(workDayModel.getDay()));
         workDay.setDetails(workDayModel.getDetails());
         workDay.setHours(workDayModel.getHours());
 

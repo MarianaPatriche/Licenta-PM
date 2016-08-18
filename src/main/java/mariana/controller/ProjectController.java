@@ -1,7 +1,6 @@
 package mariana.controller;
 
 import mariana.model.ProjectModel;
-import mariana.repository.ProjectRepository;
 import mariana.service.AllocationService;
 import mariana.service.ProjectService;
 import mariana.util.ProjectStatus;
@@ -11,11 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Arrays;
@@ -38,7 +33,7 @@ public class ProjectController extends BaseController{
     private AllocationService allocationService;
 
     @RequestMapping(value = "/form/{id}", method = RequestMethod.GET)
-    public String projectForm(@PathVariable("id") Long id, Model model) {
+    public String projectForm(@PathVariable("id") Long id, Model model) throws Exception {
         if(id != 0) {
             model.addAttribute("project", projectService.findProject(id));
         }
@@ -64,12 +59,12 @@ public class ProjectController extends BaseController{
     @RequestMapping(value = "/list")
     public String projectList(Model model, @RequestParam(value = "page", required = true, defaultValue = "0") int page,
                               @RequestParam(value = "size", required = true, defaultValue = "2") int size){
-        model.addAttribute("page", projectService.getProjectModelList(new PageRequest(page, size)));
+        model.addAttribute("page", projectService.getProjectList(new PageRequest(page, size)));
         return "project/list";
     }
 
     @RequestMapping(value = "/detail/{id}")
-    public String projectDetail(@PathVariable("id") Long id , Model model){
+    public String projectDetail(@PathVariable("id") Long id , Model model) throws  Exception{
         model.addAttribute("project", projectService.getProjectModel(id));
         model.addAttribute("actualTeam", allocationService.getTeamByProject(id, Boolean.TRUE));
         model.addAttribute("oldTeam", allocationService.getTeamByProject(id, Boolean.FALSE));

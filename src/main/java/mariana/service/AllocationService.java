@@ -1,11 +1,12 @@
 package mariana.service;
 
-import mariana.entity.UserProject;
+import mariana.entity.EmployeeProject;
 import mariana.model.AllocationModel;
 import mariana.model.AllocationUserModel;
+import mariana.repository.EmployeeRepository;
 import mariana.repository.ProjectRepository;
-import mariana.repository.UserProjectRepository;
-import mariana.repository.UserRepository;
+import mariana.repository.EmployeeProjectRepository;
+import mariana.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,35 +22,35 @@ import java.util.List;
 public class AllocationService {
 
     @Autowired
-    private UserProjectRepository userProjectRepository;
+    private EmployeeProjectRepository employeeProjectRepository;
 
     @Autowired
     private ProjectRepository projectRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private EmployeeRepository employeeRepository;
 
     public void save(AllocationModel allocationModel){
-        UserProject userProject = new UserProject();
-        userProject.setProject(projectRepository.findOne(allocationModel.getProjectId()));
-        userProject.setUser(userRepository.findOne(allocationModel.getUserId()));
-        userProject.setStatus(Boolean.TRUE);
+        EmployeeProject employeeProject = new EmployeeProject();
+        employeeProject.setProject(projectRepository.findOne(allocationModel.getProjectId()));
+        employeeProject.setEmployee(employeeRepository.findOne(allocationModel.getEmployeeId()));
+        employeeProject.setStatus(Boolean.TRUE);
 
-        userProjectRepository.save(userProject);
+        employeeProjectRepository.save(employeeProject);
     }
 
-    public List<AllocationUserModel> getTeamByProject(Long projectId, Boolean status){
-            return getTeamModelList(userProjectRepository.findByProjectIdAndStatus(projectId, status));
+    public List<AllocationUserModel> getTeamByProject(Long projectId, Boolean status) throws Exception{
+            return getTeamModelList(employeeProjectRepository.findByProjectIdAndStatus(projectId, status));
     }
 
-    private List<AllocationUserModel> getTeamModelList(List<UserProject> userProjectList){
+    private List<AllocationUserModel> getTeamModelList(List<EmployeeProject> employeeProjectList) throws Exception{
         List<AllocationUserModel> modelList = new ArrayList<>();
-        for(UserProject userProject : userProjectList){
+        for(EmployeeProject employeeProject : employeeProjectList){
             AllocationUserModel model = new AllocationUserModel();
-            model.setName(userProject.getUser().getEmployee().getFirstName() + " " + userProject.getUser().getEmployee().getLastName());
-            model.setStartDate(userProject.getCreatedDate().toString("dd/mm/yyyy"));
-            model.setEndDate(userProject.getLastUpdateDate().toString("dd/mm/yyyy"));
-            model.setAllocationId(userProject.getId());
+            model.setName(employeeProject.getEmployee().getFirstName() + " " + employeeProject.getEmployee().getLastName());
+            model.setStartDate(DateUtils.dateToString(employeeProject.getCreatedDate()));
+            model.setEndDate(DateUtils.dateToString(employeeProject.getLastUpdateDate()));
+            model.setAllocationId(employeeProject.getId());
 
             modelList.add(model);
         }
@@ -58,9 +59,9 @@ public class AllocationService {
     }
 
     public Long changeAllocationStatut(Long allocationId){
-        UserProject userProject = userProjectRepository.findOne(allocationId);
-        userProject.setStatus(!userProject.getStatus());
+        EmployeeProject employeeProject = employeeProjectRepository.findOne(allocationId);
+        employeeProject.setStatus(!employeeProject.getStatus());
 
-        return userProject.getProject().getId();
+        return employeeProject.getProject().getId();
     }
 }

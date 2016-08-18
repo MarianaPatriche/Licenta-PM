@@ -7,7 +7,7 @@ public class AllocationModel {
 
     private Long projectId;
 
-    private Long userId;
+    private Long employeeId;
 
     private Boolean status;
 
@@ -19,12 +19,12 @@ public class AllocationModel {
         this.projectId = projectId;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getEmployeeId() {
+        return employeeId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
 
     public Boolean getStatus() {
@@ -39,7 +39,7 @@ public class AllocationModel {
     public String toString() {
         return "AllocationModel{" +
                 "projectId=" + projectId +
-                ", userId=" + userId +
+                ", employeeId=" + employeeId +
                 ", status=" + status +
                 '}';
     }

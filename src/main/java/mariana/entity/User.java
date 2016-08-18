@@ -1,7 +1,6 @@
 package mariana.entity;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 /**
  * Created by mariana on 31.05.2016.
@@ -24,10 +23,6 @@ public class User{
 
     @Column(name = "enabled")
     private Boolean enabled;
-
-    @OneToOne
-    @JoinColumn(name = "EMPLOYEE_ID")
-    private Employee employee;
 
     public Long getId() {
         return id;
@@ -61,15 +56,7 @@ public class User{
         this.enabled = enabled;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public User(String password, String username, Boolean enabled) {
+    public User(String username, String password, Boolean enabled) {
         this.password = password;
         this.username = username;
         this.enabled = enabled;

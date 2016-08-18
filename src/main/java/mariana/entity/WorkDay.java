@@ -1,8 +1,10 @@
 package mariana.entity;
 
-import org.joda.time.LocalDate;
+
 
 import javax.persistence.*;
+import java.time.LocalDate;
+
 /**
  * Created by mariana on 31.05.2016.
  */
@@ -16,8 +18,8 @@ public class WorkDay {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
-    private User user;
+    @JoinColumn(name = "EMPLOYEE_ID")
+    private Employee employee;
 
     @ManyToOne
     @JoinColumn(name = "PROJECT_ID")
@@ -40,12 +42,12 @@ public class WorkDay {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public Project getProject() {

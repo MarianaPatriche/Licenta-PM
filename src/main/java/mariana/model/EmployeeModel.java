@@ -1,16 +1,44 @@
 package mariana.model;
 
-import java.time.LocalDate;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by mariana on 02.08.2016.
  */
 public class EmployeeModel {
 	private Long id;
+
+	@NotNull
+	@Size(min = 2)
 	private String firstName;
+
+	@NotNull
+	@Size(min = 2)
 	private String lastName;
+
+	@NotNull
+	@Min(4)
+	@Max(8)
 	private Long workHours;
-	private LocalDate dateOfEmployment;
+
+	@NotNull
+	private String dateOfEmployment;
+
+	@NotNull
+	@Size(min = 2)
+	private String email;
+
+	@NotNull
+	private Long vacantionDays;
+
+	@NotNull
+	private String birthday;
+
+	@NotNull
+	private String job;
 
 	public String getFirstName() {
 		return firstName;
@@ -44,22 +72,35 @@ public class EmployeeModel {
 		this.lastName = lastName;
 	}
 
-	public LocalDate getDateOfEmployment() {
+	public String getDateOfEmployment() {
 		return dateOfEmployment;
 	}
 
-	public void setDateOfEmployment(LocalDate dateOfEmployment) {
+	public void setDateOfEmployment(String dateOfEmployment) {
 		this.dateOfEmployment = dateOfEmployment;
 	}
 
-	@Override
-	public String toString() {
-		return "EmployeeModel{" +
-				"id=" + id +
-				", firstName='" + firstName + '\'' +
-				", lastName='" + lastName + '\'' +
-				", workHours=" + workHours +
-				", dateOfEmployment=" + dateOfEmployment +
-				'}';
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Long getVacantionDays() {
+		return vacantionDays;
+	}
+
+	public void setVacantionDays(Long vacantionDays) {
+		this.vacantionDays = vacantionDays;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
 	}
 }
