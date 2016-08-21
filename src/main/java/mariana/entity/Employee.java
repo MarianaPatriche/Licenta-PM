@@ -44,6 +44,9 @@ public class Employee{
 	@JoinColumn(name = "USER_ID")
 	private User user;
 
+	@Column(name = "ACTIVE")
+	private Boolean active;
+
 	public Long getId() {
 		return id;
 	}
@@ -122,5 +125,13 @@ public class Employee{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 }

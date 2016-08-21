@@ -4,6 +4,7 @@ import mariana.entity.Employee;
 import mariana.entity.User;
 import mariana.entity.UserRole;
 import mariana.mapper.EmployeeMapper;
+import mariana.model.EmployeeIdNameModel;
 import mariana.model.EmployeeModel;
 import mariana.repository.EmployeeRepository;
 import mariana.repository.UserRepository;
@@ -18,6 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -45,6 +48,7 @@ public class EmployeeService {
 	public void saveEmployee(EmployeeModel employeeModel){
 		Employee employee = EmployeeMapper.toEmployee(employeeModel);
 		employee.setSickDays(SICK_DAYS);
+		employee.setActive(Boolean.TRUE);
 
 		User user = new User();
 		String password = UUID.randomUUID().toString().substring(0, 5);
@@ -68,5 +72,16 @@ public class EmployeeService {
 			username = username + employee.getBirthday().getDayOfMonth();
 		}
 		return username;
+	}
+
+	public List<EmployeeIdNameModel> getSearchEmployeeList(String search){
+		List<Employee> employeeList = employeeRepository
+				.findByFirstNameContainingOrLastNameContainingAllIgnoreCase("%" + search.toLowerCase() + "%", "%" + search.toLowerCase() + "%");
+		List<EmployeeIdNameModel> employeeIdNameModelList = new ArrayList<>();
+		for (Employee employee : employeeList){
+			EmployeeIdNameModel model = new EmployeeIdNameModel(employee.getId(), employee.getLastName() + " " + employee.getFirstName());
+			employeeIdNameModelList.add(model);
+		}
+		return employeeIdNameModelList;
 	}
 }

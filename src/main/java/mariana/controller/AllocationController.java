@@ -1,8 +1,9 @@
 package mariana.controller;
 
 import mariana.model.AllocationModel;
-import mariana.model.UserIdUsernameModel;
+import mariana.model.EmployeeIdNameModel;
 import mariana.service.AllocationService;
+import mariana.service.EmployeeService;
 import mariana.service.ProjectService;
 import mariana.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class AllocationController extends BaseController {
     private ProjectService projectService;
 
     @Autowired
-    private UserService userService;
+    private EmployeeService employeeService;
 
     @Autowired
     private AllocationService allocationService;
@@ -40,8 +41,8 @@ public class AllocationController extends BaseController {
 
     @RequestMapping("/getEmployees")
     @ResponseBody
-    public List<UserIdUsernameModel> getEmployees(@RequestParam String search){
-        return userService.getEmployees(search);
+    public List<EmployeeIdNameModel> getEmployees(@RequestParam String search){
+        return employeeService.getSearchEmployeeList(search);
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)

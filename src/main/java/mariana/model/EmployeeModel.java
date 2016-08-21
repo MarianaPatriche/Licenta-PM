@@ -37,8 +37,7 @@ public class EmployeeModel {
 	@NotNull
 	private String birthday;
 
-	@NotNull
-	private String job;
+	private Boolean active;
 
 	public String getFirstName() {
 		return firstName;
@@ -102,5 +101,13 @@ public class EmployeeModel {
 
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 }

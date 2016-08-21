@@ -1,7 +1,7 @@
 package mariana.service;
 
 import mariana.entity.User;
-import mariana.model.UserIdUsernameModel;
+import mariana.model.EmployeeIdNameModel;
 import mariana.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +20,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<UserIdUsernameModel> getEmployees(String search){
+    public List<EmployeeIdNameModel> getEmployees(String search){
         List<User> userList = userRepository.findByEnabledTrueAndUsernameContaining(search);
-        List<UserIdUsernameModel>  modelList = new ArrayList<>();
+        List<EmployeeIdNameModel>  modelList = new ArrayList<>();
 
         for(User user : userList){
-            UserIdUsernameModel model = new UserIdUsernameModel(user.getId(), user.getUsername());
+            EmployeeIdNameModel model = new EmployeeIdNameModel(user.getId(), user.getUsername());
             modelList.add(model);
         }
 

@@ -18,6 +18,7 @@ public class EmployeeMapper {
 		employee.setEmail(employeeModel.getEmail());
 		employee.setVacantionDays(employeeModel.getVacantionDays());
 		employee.setBirthday(DateUtils.toLocalDate(employeeModel.getBirthday()));
+		employee.setActive(employeeModel.getActive());
 
 		return employee;
 	}
