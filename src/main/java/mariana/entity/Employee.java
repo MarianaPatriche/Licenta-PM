@@ -25,11 +25,15 @@ public class Employee{
 	@Column(name = "date_of_employment")
 	private LocalDate dateOfEmployment;
 
+	@OneToOne
+	@JoinColumn(name = "USER_ID")
+	private User user;
+
+	@Column(name = "ACTIVE")
+	private Boolean active;
+
 	@Column(name = "work_hours")
 	private Long workHours;
-
-	@Column(name = "vacantion_days")
-	private Long vacantionDays;
 
 	@Column(name = "sick_days")
 	private Long sickDays;
@@ -40,12 +44,8 @@ public class Employee{
 	@Column(name = "birthday")
 	private LocalDate birthday;
 
-	@OneToOne
-	@JoinColumn(name = "USER_ID")
-	private User user;
-
-	@Column(name = "ACTIVE")
-	private Boolean active;
+	@Column(name = "vacantion_days")
+	private Long vacantionDays;
 
 	public Long getId() {
 		return id;
