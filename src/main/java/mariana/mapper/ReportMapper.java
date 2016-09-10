@@ -56,6 +56,7 @@ public class ReportMapper {
 				ReportCell.of(baseRequest.getCreatedDate().toString("dd/MM/yyyy")), ReportCell.of(getBaseRequestStatusType(baseRequest.getStatus())), ReportCell.of(baseRequest.getAssignedUser()),
 				ReportCell.of(baseRequest.getOutdatedDays() != null ? (baseRequest.getOutdatedDays() > 0 ? EXCEEDED_SLA : WITHIN_SLA) : WITHIN_SLA),
 				ReportCell.of(baseRequest.getPrice() != null ? baseRequest.getPrice().toString() : "-"));*/
+		return new ReportRow(new ArrayList<ReportCell>());
 	}
 
 	private static ReportSheet mapReportSheetForBaseRequest(/*List<BaseRequest> baseRequests*/) {

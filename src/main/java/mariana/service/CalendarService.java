@@ -47,6 +47,7 @@ public class CalendarService {
         List<WorkDay> workDays = workDayRepository.findByEmployeeUserUsernameAndDayBetween(
                 Auth.userLoggedIn(), date.minusMonths(1), date.plusMonths(1));
 
+
         List<ProjectCalendarModel> finalList = new ArrayList<>();
 
         for(WorkDay workDay : workDays){
@@ -54,7 +55,7 @@ public class CalendarService {
 
             model.setBackgroundColor(workDay.getProject().getColor());
             model.setId(workDay.getProject().getId());
-            model.setStart(DateUtils.dateToString(workDay.getDay()));
+            model.setStart(workDay.getDay().toString());
             model.setTitle(workDay.getProject().getName());
             model.setUrl("/project/detail/" + workDay.getProject().getId());
             model.setBorderColor(workDay.getProject().getColor());
@@ -74,7 +75,7 @@ public class CalendarService {
             ProjectCalendarModel model = new ProjectCalendarModel();
 
             model.setBackgroundColor("#eeeeee");
-            model.setStart(DateUtils.dateToString(vacantionDay.getDay()));
+            model.setStart(vacantionDay.getDay().toString());
             model.setTitle("Concediu");
             model.setBorderColor("#bbbbbb");
 
@@ -93,7 +94,7 @@ public class CalendarService {
             ProjectCalendarModel model = new ProjectCalendarModel();
 
             model.setBackgroundColor("#8B0000");
-            model.setStart(DateUtils.dateToString(sickDay.getDay()));
+            model.setStart(sickDay.getDay().toString());
             model.setTitle("Sick day");
             model.setBorderColor("#8B0000");
 

@@ -33,8 +33,8 @@ import static java.io.File.separator;
 public class ReportService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReportService.class);
 
-	@Value("${report.path}")
-	private String path;
+	//@Value("${report.path}")
+	private String path = "";
 
 	@Autowired
 	private CreateReportService createReportService;

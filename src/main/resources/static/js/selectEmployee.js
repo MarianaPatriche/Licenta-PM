@@ -4,7 +4,6 @@ function sendData() {
         url: '/allocate/getEmployees',
         data: {search: $('#employee').val()},
         success: function (data) {
-            console.log(data);
             $('#employeeSelect option').remove();
             $('#employeeSelect').css('display', 'block');
             $('#employeeSelect').append("<option disabled='disabled' selected='selected'>Selecteaza angajatul</option>");

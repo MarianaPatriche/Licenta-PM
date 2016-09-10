@@ -30,6 +30,7 @@ public class CalendarController extends BaseController{
     @RequestMapping("/projects/data")
     @ResponseBody
     public List<ProjectCalendarModel> getProjectCalendarData(@RequestParam(name = "date", required = false) String date) throws Exception{
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> date" + date);
         if(date != null) {
             return calendarService.getProjectCalendarForUser(DateUtils.toLocalDate(date));
         }

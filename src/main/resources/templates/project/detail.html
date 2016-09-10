@@ -91,7 +91,7 @@
                                         <ul class="dashboard-list" th:each="employee : ${actualTeam}">
                                             <li style="margin-bottom: 10px">
                                                 <a href="#">
-                                                    <img class="avatar" alt="Dennis Ji" src="img/avatar.jpg"/>
+                                                    <img class="avatar" th:src="@{${employee.picturePath}}"/>
                                                 </a>
                                                 <strong>Nume:</strong> <a href="#" th:text="${employee.name}"></a><br/>
                                                 <strong>Data:</strong> <span th:text="${employee.startDate}"></span><br/>
@@ -114,7 +114,7 @@
                                         <ul class="dashboard-list" th:each="employee : ${oldTeam}">
                                             <li style="margin-bottom: 10px">
                                                 <a href="#">
-                                                    <img class="avatar" alt="Dennis Ji" src="img/avatar.jpg"/>
+                                                    <img class="avatar" th:src="@{${employee.picturePath}}"/>
                                                 </a>
                                                 <strong>Nume:</strong> <a href="#" th:text="${employee.name}"></a><br/>
                                                 <strong>Data:</strong> <span th:text="${employee.endDate}"></span><br/>

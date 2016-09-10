@@ -46,7 +46,7 @@
             setTimeout(function () {
                 var source = {
                     data: {
-                        date: '01/' + ($('#calendar').fullCalendar('getDate').getMonth() + 1)  +
+                        date: '01/' + '0' + ($('#calendar').fullCalendar('getDate').getMonth() + 1)  +
                                 '/' + $('#calendar').fullCalendar('getDate').getFullYear()
                     },
                     url: '/calendar/projects/data'

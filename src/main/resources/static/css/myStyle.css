@@ -1,0 +1,25 @@
+.statbox .footer{
+    width: 100% !important;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.statbox .footer a{
+    margin-left: 10px;
+}
+
+.number{
+    right: 0px !important;
+    left: 0px !important;
+}
+
+.number i{
+    margin-left: 10px;
+    font-size: 50px;
+}
+
+.statbox .number{
+    top: 20px;
+}

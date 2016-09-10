@@ -25,58 +25,76 @@
             <div class="row-fluid">
 
                 <div class="span3 statbox purple" onTablet="span6" onDesktop="span3">
-                    <div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div>
-                    <div class="number">854<i class="icon-arrow-up"></i></div>
-                    <div class="title">visits</div>
+                    <div class="number"><i class="icon-folder-open"></i></div>
                     <div class="footer">
                         <a th:href="@{/project/form/0}"> Adauga proiect</a>
                     </div>
                 </div>
                 <div class="span3 statbox green" onTablet="span6" onDesktop="span3">
-                    <div class="boxchart">1,2,6,4,0,8,2,4,5,3,1,7,5</div>
-                    <div class="number">123<i class="icon-arrow-up"></i></div>
-                    <div class="title">sales</div>
+                    <div class="number"><i class="icon-align-justify"></i></div>
                     <div class="footer">
                         <a th:href="@{/project/list}"> Vezi proiecte</a>
                     </div>
                 </div>
-                <div class="span3 statbox blue noMargin" onTablet="span6" onDesktop="span3">
-                    <div class="boxchart">5,6,7,2,0,-4,-2,4,8,2,3,3,2</div>
-                    <div class="number">982<i class="icon-arrow-up"></i></div>
-                    <div class="title">orders</div>
+                <div class="span3 statbox yellow noMargin" onTablet="span6" onDesktop="span3">
+                    <div class="number"><i class="icon-random"></i></div>
                     <div class="footer">
                         <a th:href="@{/allocate/form}">Asigneaza proiect</a>
                     </div>
                 </div>
-                <div class="span3 statbox yellow" onTablet="span6" onDesktop="span3">
-                    <div class="boxchart">7,2,2,2,1,-4,-2,4,8,,0,3,3,5</div>
-                    <div class="number">678<i class="icon-arrow-down"></i></div>
-                    <div class="title">visits</div>
+               <!-- <div class="span3 statbox yellow" onTablet="span6" onDesktop="span3">
+                    <div class="number"><i class="icon-tasks"></i></div>
                     <div class="footer">
                         <a th:href="@{/workDay/form}"> Adauga zi de lucru </a>
                     </div>
+                </div>-->
+                 <div class="span3 statbox red" onTablet="span6" onDesktop="span3">
+                    <div class="number"><i class="icon-lock"></i></div>
+                    <div class="footer">
+                        <a th:href="@{/workDay/form}"> Profilul meu </a>
+                    </div>
                 </div>
+            </div>
 
-                <div class="span3 statbox yellow" onTablet="span6" onDesktop="span3">
-                    <div class="boxchart">7,2,2,2,1,-4,-2,4,8,,0,3,3,5</div>
-                    <div class="number">678<i class="icon-arrow-down"></i></div>
-                    <div class="title">visits</div>
+
+<div class="row-fluid">
+               <!-- <div class="span3 statbox pink" onTablet="span6" onDesktop="span3">
+                    <div class="number"><i class="icon-plane"></i></div>
                     <div class="footer">
                         <a th:href="@{/freeDay/form}"> Adauga zi libera </a>
                     </div>
-                </div>
+                </div>-->
 
-                <div class="span3 statbox yellow" onTablet="span6" onDesktop="span3">
-                    <div class="boxchart">7,2,2,2,1,-4,-2,4,8,,0,3,3,5</div>
-                    <div class="number">678<i class="icon-arrow-down"></i></div>
-                    <div class="title">visits</div>
+                <div class="span3 statbox red" onTablet="span6" onDesktop="span3">
+                    <div class="number"><i class="icon-user"></i></div>
                     <div class="footer">
                         <a th:href="@{/employee/form}"> Angajat nou </a>
                     </div>
                 </div>
 
+    <div class="span3 statbox yellow" onTablet="span6" onDesktop="span3">
+        <div class="number"><i class="icon-th-list"></i></div>
+        <div class="footer">
+            <a th:href="@{/employee/form}"> Vezi angajati </a>
+        </div>
+    </div>
 
-            </div>
+    <div class="span3 statbox green" onTablet="span6" onDesktop="span3">
+        <div class="number"><i class="icon-calendar"></i></div>
+        <div class="footer">
+            <a th:href="@{/employee/form}"> Calendare </a>
+        </div>
+    </div>
+
+    <div class="span3 statbox purple" onTablet="span6" onDesktop="span3">
+        <div class="number"><i class="icon-pencil"></i></div>
+        <div class="footer">
+            <a th:href="@{/employee/form}"> Rapoarte </a>
+        </div>
+    </div>
+</div>
+
+
 
 
         </div><!--/.fluid-container-->
