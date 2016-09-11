@@ -66,7 +66,7 @@
 
                                 <div>
                                     <span>Culoare: </span>
-                                    <span th:text="${project.color}"></span>
+                                    <span th:style= "'background-color:' + ${project.color} + '; color: ' + ${project.color} " th:text="${project.color}"></span>
                                 </div>
                             </div>
                             <div class="tab-pane" id="messages">
@@ -91,11 +91,11 @@
                                         <ul class="dashboard-list" th:each="employee : ${actualTeam}">
                                             <li style="margin-bottom: 10px">
                                                 <a href="#">
-                                                    <img class="avatar" th:src="@{${employee.picturePath}}"/>
+                                                   <!-- <img class="avatar" th:src="@{${employee.picturePath}}"/>-->
                                                 </a>
                                                 <strong>Nume:</strong> <a href="#" th:text="${employee.name}"></a><br/>
                                                 <strong>Data:</strong> <span th:text="${employee.startDate}"></span><br/>
-                                                <a class="btn btn-info" th:href="@{/allocate/changeStatus/__${employee.allocationId}__}">
+                                                <a class="btn btn-danger" th:href="@{/allocate/changeStatus/__${employee.allocationId}__}">
                                                     <i class="halflings-icon white edit"></i>
                                                 </a>
                                             </li>
@@ -114,11 +114,11 @@
                                         <ul class="dashboard-list" th:each="employee : ${oldTeam}">
                                             <li style="margin-bottom: 10px">
                                                 <a href="#">
-                                                    <img class="avatar" th:src="@{${employee.picturePath}}"/>
+                                              <!--      <img class="avatar" th:src="@{${employee.picturePath}}"/>-->
                                                 </a>
                                                 <strong>Nume:</strong> <a href="#" th:text="${employee.name}"></a><br/>
                                                 <strong>Data:</strong> <span th:text="${employee.endDate}"></span><br/>
-                                                <a class="btn btn-info" th:href="@{/allocate/changeStatus/__${employee.allocationId}__}">
+                                                <a class="btn btn-success" th:href="@{/allocate/changeStatus/__${employee.allocationId}__}">
                                                     <i class="halflings-icon white edit"></i>
                                                 </a>
                                             </li>

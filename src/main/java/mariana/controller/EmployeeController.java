@@ -8,10 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -49,5 +46,11 @@ public class EmployeeController extends BaseController {
 							  @RequestParam(value = "size", defaultValue = "2") int size){
 		model.addAttribute("page", employeeService.getEmployeeList(new PageRequest(page, size)));
 		return "employee/list";
+	}
+
+	@RequestMapping(value = "/inactive/{employeeId}")
+	public String makeEmployeeInactive(Model model, @PathVariable("employeeId") Long employeeId){
+		employeeService.makeEmployeeInactive(employeeId);
+		return "redirect:/employee/list";
 	}
 }

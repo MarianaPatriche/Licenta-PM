@@ -63,7 +63,7 @@ public class EmployeeService {
 	}
 
 	public Page<Employee> getEmployeeList(Pageable pageable){
-		return employeeRepository.findAll(pageable);
+		return employeeRepository.findByActiveTrue(pageable);
 	}
 
 	private String getGeneratedUsername(Employee employee){
@@ -83,5 +83,16 @@ public class EmployeeService {
 			employeeIdNameModelList.add(model);
 		}
 		return employeeIdNameModelList;
+	}
+
+	public void makeEmployeeInactive(Long employeeId){
+		Employee employee = employeeRepository.findOne(employeeId);
+		employee.setActive(Boolean.FALSE);
+
+		User user = employee.getUser();
+		user.setEnabled(Boolean.FALSE);
+
+		userRepository.save(user);
+		employeeRepository.save(employee);
 	}
 }

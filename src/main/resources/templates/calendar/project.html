@@ -33,16 +33,14 @@
                     <div class="box-content">
                         <div id="calendar" class="span9"></div>
                         <div class="control-group">
-           <label class="control-label">Angajat</label>
-           <div class="controls">
-               <input type="text" id="employee"/>
-               <input type="hidden" name="employeeId" id="employeeId"/>
-               <button type="button" onclick="sendData()" class="btn btn-primary icon-serch" style="height:29px; width: 30px"></button>
-               <select id="employeeSelect" style="display: none;">
-                   <option value="" disabled="disabled">Selecteaza angajatul</option>
-               </select>
-           </div>
-       </div>
+                            <label class="control-label">Proiect</label>
+                            <div class="controls">
+                                <select id="employeeSelect">
+                                    <option value="" disabled="disabled" selected="selected">Selecteaza proiectul</option>
+                                    <option th:each="project : ${projects}" th:value="${project.id}" th:text="${project.name}"></option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div><!--/row-->
@@ -70,9 +68,9 @@
                         '/' + $('#calendar').fullCalendar('getDate').getFullYear(),
                         employee: $('#employeeSelect').val()
                     },
-                    url: '/calendar/employees/data'
+                    url: '/calendar/project/data'
                 };
-                $('#calendar').fullCalendar('removeEventSource', '/calendar/employees/data');
+                $('#calendar').fullCalendar('removeEventSource', '/calendar/project/data');
                 $('#calendar').fullCalendar('addEventSource', source);
             },100);
         });
@@ -85,9 +83,9 @@
                         '/' + $('#calendar').fullCalendar('getDate').getFullYear(),
                         employee: $('#employeeSelect').val()
                     },
-                    url: '/calendar/employees/data'
+                    url: '/calendar/project/data'
                 };
-                $('#calendar').fullCalendar('removeEventSource', '/calendar/employees/data');
+                $('#calendar').fullCalendar('removeEventSource', '/calendar/project/data');
                 $('#calendar').fullCalendar('addEventSource', source);
 
             },100);
@@ -102,7 +100,7 @@
                 center: 'title'
             },
             events: {
-                url: '/calendar/employees/data',
+                url: '/calendar/project/data',
                 error: function() {
                     $('#script-warning').show();
                 }
@@ -113,7 +111,6 @@
         });
     }
 </script>
-<script th:src="@{/js/selectEmployee.js}"></script>
 
 </body>
 </html>

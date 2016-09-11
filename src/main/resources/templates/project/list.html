@@ -74,7 +74,8 @@
                                     </td>
                                     <td th:text="${project.hours}"></td>
                                     <td th:text="${project.description}"></td>
-                                    <td th:text="${project.color}"></td>
+                                    <td> <span th:style= "'background-color:' + ${project.color} + '; color: ' + ${project.color} "
+                                               th:text="${project.color}"></span></td>
                                     <td class="center">
                                         <a class="btn btn-success"
                                            th:href="@{/project/detail/__${project.id}__}">

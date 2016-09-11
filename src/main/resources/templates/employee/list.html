@@ -65,15 +65,15 @@
                                     <td th:text="${employee.sickDays}"></td>
                                     <td th:text="${employee.email}"></td>
                                     <td class="center">
-                                        <a class="btn btn-success"
+                                       <!-- <a class="btn btn-success"
                                            th:href="@{/employee/detail/__${employee.id}__}">
                                             <i class="halflings-icon white zoom-in"></i>
                                         </a>
                                         <a class="btn btn-info"
                                            th:href="@{/employee/form/__${employee.id}__}">
                                             <i class="halflings-icon white edit"></i>
-                                        </a>
-                                        <a class="btn btn-danger" href="#">
+                                        </a>-->
+                                        <a class="btn btn-danger" th:href="@{/employee/inactive/__${employee.id}__}">
                                             <i class="halflings-icon white trash"></i>
                                         </a>
                                     </td>

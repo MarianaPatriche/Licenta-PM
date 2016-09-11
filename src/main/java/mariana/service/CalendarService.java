@@ -34,18 +34,18 @@ public class CalendarService {
     @Autowired
     private SickDayRepository sickDayRepository;
 
-    public List<ProjectCalendarModel> getProjectCalendarForUser(LocalDate localDate) throws Exception{
+    public List<ProjectCalendarModel> getProjectCalendarForUser(LocalDate localDate, String employee) throws Exception{
         List<ProjectCalendarModel> finalList = new ArrayList<>();
-        finalList.addAll(getWorkDays(localDate));
-        finalList.addAll(getSickDays(localDate));
-        finalList.addAll(getVacationDays(localDate));
+        finalList.addAll(getWorkDays(localDate, employee));
+        finalList.addAll(getSickDays(localDate, employee));
+        finalList.addAll(getVacationDays(localDate, employee));
 
         return finalList;
     }
 
-    private List<ProjectCalendarModel> getWorkDays(LocalDate date) throws Exception{
+    private List<ProjectCalendarModel> getWorkDays(LocalDate date, String employee) throws Exception{
         List<WorkDay> workDays = workDayRepository.findByEmployeeUserUsernameAndDayBetween(
-                Auth.userLoggedIn(), date.minusMonths(1), date.plusMonths(1));
+               employee, date.minusMonths(1), date.plusMonths(1));
 
 
         List<ProjectCalendarModel> finalList = new ArrayList<>();
@@ -65,9 +65,9 @@ public class CalendarService {
         return finalList;
     }
 
-    private List<ProjectCalendarModel> getVacationDays(LocalDate date) throws Exception{
+    private List<ProjectCalendarModel> getVacationDays(LocalDate date, String employee) throws Exception{
         List<VacantionDay> vacationDays = vacantionDayRepository.findByEmployeeUserUsernameAndDayBetween(
-                Auth.userLoggedIn(), date.minusMonths(1), date.plusMonths(1));
+                employee, date.minusMonths(1), date.plusMonths(1));
 
         List<ProjectCalendarModel> finalList = new ArrayList<>();
 
@@ -84,9 +84,9 @@ public class CalendarService {
         return finalList;
     }
 
-    private List<ProjectCalendarModel> getSickDays(LocalDate date) throws Exception{
+    private List<ProjectCalendarModel> getSickDays(LocalDate date, String employee) throws Exception{
         List<SickDay> sickDays = sickDayRepository.findByEmployeeUserUsernameAndDayBetween(
-                Auth.userLoggedIn(), date.minusMonths(1), date.plusMonths(1));
+                employee, date.minusMonths(1), date.plusMonths(1));
 
         List<ProjectCalendarModel> finalList = new ArrayList<>();
 
@@ -97,6 +97,30 @@ public class CalendarService {
             model.setStart(sickDay.getDay().toString());
             model.setTitle("Sick day");
             model.setBorderColor("#8B0000");
+
+            finalList.add(model);
+        }
+        return finalList;
+    }
+
+    public List<ProjectCalendarModel> getEmployees(LocalDate date, Long projectId){
+        List<WorkDay> workDays = workDayRepository.findByProjectIdAndDayBetween(
+                projectId, date.minusMonths(1), date.plusMonths(1));
+
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + workDays.size() + "   " + date);
+
+
+        List<ProjectCalendarModel> finalList = new ArrayList<>();
+
+        for(WorkDay workDay : workDays){
+            ProjectCalendarModel model = new ProjectCalendarModel();
+
+            model.setBackgroundColor(workDay.getProject().getColor());
+            model.setId(workDay.getProject().getId());
+            model.setStart(workDay.getDay().toString());
+            model.setTitle(workDay.getEmployee().getFirstName() + " " + workDay.getEmployee().getLastName());
+            model.setUrl("/project/detail/" + workDay.getProject().getId());
+            model.setBorderColor(workDay.getProject().getColor());
 
             finalList.add(model);
         }

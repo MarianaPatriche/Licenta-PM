@@ -1,6 +1,8 @@
 package mariana.repository;
 
 import mariana.entity.Employee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -15,4 +17,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query(value = "select * from employee where active = true and (first_name like ? or" +
             " last_name like ? )", nativeQuery = true)
     List<Employee> findByFirstNameContainingOrLastNameContainingAllIgnoreCase(String firstName, String lastName);
+
+    Page<Employee> findByActiveTrue(Pageable pageable);
+
+    List<Employee> findByActiveTrue();
 }

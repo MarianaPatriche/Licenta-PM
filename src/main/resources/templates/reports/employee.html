@@ -26,7 +26,7 @@
             <div class="row-fluid sortable">
                 <div class="box span12">
                     <div class="box-header">
-                        <h2><i class="halflings-icon white edit"></i><span class="break"></span>Adauga zi de lucru!</h2>
+                        <h2><i class="halflings-icon white edit"></i><span class="break"></span>Adauga un nou proiect!</h2>
                         <div class="box-icon">
                             <a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
                             <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
@@ -34,48 +34,37 @@
                         </div>
                     </div>
                     <div class="box-content">
-                        <form class="form-horizontal" method="post" th:object="${workDayModel}" th:action="@{/workDay/save}">
+                        <form class="form-horizontal" method="post" th:action="@{/report/generate}">
                             <fieldset>
-
                                 <div class="control-group">
-                                    <label class="control-label">Proiect</label>
+                                    <label class="control-label" for="name">Angajat</label>
                                     <div class="controls">
-                                        <select id="project" th:field="*{projectId}">
-                                            <option th:each="project : ${projectList}" th:value="${project.id}"  th:text="${project.name}"></option>
+                                        <select name="employeeId">
+                                            <option disabled="disabled" selected="selected">Selecteaza angajatul</option>
+                                            <option th:each="employee : ${employeeList}" th:value="${employee.id}"
+                                                    th:text="${employee.firstName} + ' ' + ${employee.lastName}"></option>
                                         </select>
                                     </div>
+
                                 </div>
 
+
                                 <div class="control-group">
-                                    <label class="control-label" for="day">Data</label>
+                                    <label class="control-label" for="startDate">Data inceput</label>
                                     <div class="controls">
-                                        <input type="text" class="input-xlarge datepicker" id="day" th:field="*{day}"/>
+                                        <input type="text" class="input-xlarge datepicker" id="startDate"  name="startDate"/>
                                     </div>
-                                    <div id="dayError"
-                                         th:if="${#fields.hasErrors('day')}"
-                                         th:errors="*{day}" style="color: red"></div>
                                 </div>
 
                                 <div class="control-group">
-                                    <label class="control-label" for="hours">Ore</label>
+                                    <label class="control-label" for="startDate">Data sfarsit</label>
                                     <div class="controls">
-                                        <input class="input-xlarge focused" id="hours" type="number" th:field="*{hours}"/>
-                                    </div>
-                                    <div id="descriptionError"
-                                         th:if="${#fields.hasErrors('hours')}"
-                                         th:errors="*{hours}" style="color: red"></div>
-                                </div>
-
-                                <div class="control-group">
-                                    <label class="control-label" for="details">Descriere</label>
-                                    <div class="controls">
-                                        <textarea class="focused" id="details" th:field="*{details}">
-                                            </textarea>
+                                        <input type="text" class="input-xlarge datepicker" id="endDate"  name="endDate"/>
                                     </div>
                                 </div>
 
                                 <div class="form-actions">
-                                    <button type="submit" class="btn btn-primary">Salveaza</button>
+                                    <button type="submit" class="btn btn-primary">Genereaza</button>
                                     <a th:href="@{/}"><input class="btn btn-default" type="button" th:value="Renunta"></input></a>
                                 </div>
                             </fieldset>

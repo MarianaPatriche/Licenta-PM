@@ -11,4 +11,6 @@ import java.util.List;
  */
 public interface WorkDayRepository extends JpaRepository<WorkDay, Long> {
     List<WorkDay> findByEmployeeUserUsernameAndDayBetween(String username, LocalDate start, LocalDate end);
+
+    List<WorkDay> findByProjectIdAndDayBetween(Long projectId, LocalDate start, LocalDate end);
 }

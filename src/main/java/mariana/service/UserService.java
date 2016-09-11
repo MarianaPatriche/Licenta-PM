@@ -1,14 +1,13 @@
 package mariana.service;
 
 import mariana.entity.User;
-import mariana.model.EmployeeIdNameModel;
+import mariana.model.ProfileModel;
 import mariana.repository.UserRepository;
+import mariana.util.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by mariana on 03.06.2016.
@@ -20,15 +19,26 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<EmployeeIdNameModel> getEmployees(String search){
-        List<User> userList = userRepository.findByEnabledTrueAndUsernameContaining(search);
-        List<EmployeeIdNameModel>  modelList = new ArrayList<>();
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-        for(User user : userList){
-            EmployeeIdNameModel model = new EmployeeIdNameModel(user.getId(), user.getUsername());
-            modelList.add(model);
-        }
+    public ProfileModel getProfileModel(){
+        ProfileModel profileModel = new ProfileModel();
+        profileModel.setUsername(Auth.userLoggedIn());
 
-        return modelList;
+        return profileModel;
+    }
+
+    public void saveNewPassword(String password){
+        User user = userRepository.findByUsername(Auth.userLoggedIn());
+        user.setPassword(passwordEncoder.encode(password));
+
+        userRepository.save(user);
+    }
+
+    public void savePicturePath(String path){
+        User user = userRepository.findByUsername(Auth.userLoggedIn());
+        user.setPicture(path);
+        userRepository.save(user);
     }
 }

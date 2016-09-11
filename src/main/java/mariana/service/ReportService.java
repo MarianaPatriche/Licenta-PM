@@ -34,7 +34,7 @@ public class ReportService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReportService.class);
 
 	//@Value("${report.path}")
-	private String path = "";
+	private String path = "/home/Desktop";
 
 	@Autowired
 	private CreateReportService createReportService;
