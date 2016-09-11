@@ -12,9 +12,9 @@ import java.util.List;
  * Created by mariana on 05.09.2016.
  */
 public class ReportMapper {
-	private static final String BASE_REQUEST_SHEET_NAME = "Raport cereri";
-	private static final String BASE_REQUEST_SHEET_TITLE = "Raport cereri - ";
-	private static final String BASE_REQUEST_REPORT_NAME = "Raport cereri - ";
+	private static final String BASE_REQUEST_SHEET_NAME = "Raport ";
+	private static final String BASE_REQUEST_SHEET_TITLE = "Raport  - ";
+	private static final String BASE_REQUEST_REPORT_NAME = "Raport  - ";
 	private static final String MAINTENANCE_REQUEST_SHEET_NAME = "Raport cereri mentenanta";
 	private static final String MAINTENANCE_REQUEST_SHEET_TITLE = "Raport cereri mentenanta - ";
 	private static final String MAINTENANCE_REQUEST_REPORT_NAME = "Raport cereri mentenanta - ";
