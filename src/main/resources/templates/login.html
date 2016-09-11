@@ -7,18 +7,16 @@
 <div class="navbar">
     <div class="navbar-inner">
         <div class="container-fluid">
-            <a class="brand" href="index.html"><span>JANUX</span></a>
+            <a class="brand" href="index.html"><span>Administrare</span></a>
         </div>
     </div>
 </div>
 <div class="container">
     <div class="content">
-        <p th:if="${param.logout}" class="alert">You have been logged out</p>
 
-        <p th:if="${param.error}" class="alert alert-error">There was an
-            error, please try again</p>
+        <p th:if="${param.error}" class="alert alert-error">Numele de utilizator sau parola sunt gresite!</p>
 
-        <h2>Login with Username and Password</h2>
+        <h2>Inregistrati-va cu numele de utilizator si parola!</h2>
 
         <form name="form" th:action="@{/login}" action="/login" method="POST">
             <fieldset>

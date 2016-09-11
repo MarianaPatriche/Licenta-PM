@@ -70,8 +70,63 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="messages">
-                                <p th:text="Specificatii">
-                                </p>
+                                <div class="span7">
+                                    <div class="priority high"><span>Prioritate ridicata</span></div>
+
+                                    <div class="task high" th:each="task : ${taskHigh}">
+                                        <div class="desc">
+                                            <div class="title" th:text="${task.name}"></div>
+                                            <div th:text="${task.description}"></div>
+                                        </div>
+                                        <!--<div class="time">
+                                            <div class="date">
+                                             <a th:href="@{/project/specification/inprogress/__${task.id}__}"> <input th:if="${task.status == T(mariana.util.SpecificationStatus).Nou}"
+                                                          class="btn btn-primary" style="width: 80px;" type="button" th:value="Inceput"></input></a>
+                                              <a th:href="@{/project/specification/done/__${task.id}__}"> <input th:if="${task.status == T(mariana.util.SpecificationStatus).Nou || task.status == T(mariana.util.SpecificationStatus).Inceput}"
+                                                        class="btn btn-success" style="width: 80px;" type="button" th:value="Terminat"></input></a>
+                                            </div>
+                                            <div th:text="${task.status}"></div>
+                                        </div>-->
+                                    </div>
+
+                                    <div class="priority medium"><span>Prioritate medie</span></div>
+
+                                    <div class="task medium" th:each="task : ${taskMedium}">
+                                        <div class="desc">
+                                            <div class="title" th:text="${task.name}"></div>
+                                            <div th:text="${task.description}"></div>
+                                        </div>
+                                        <!--<div class="time">
+                                            <div class="date">
+                                                <a th:href="@{/project/specification/inprogress/__${task.id}__}"> <input th:if="${task.status == T(mariana.util.SpecificationStatus).Nou}"
+                                                                                                                         class="btn btn-primary" style="width: 80px;" type="button" th:text="Inceput"></input></a>
+                                                <a th:href="@{/project/specification/done/__${task.id}__}"> <input th:if="${task.status == T(mariana.util.SpecificationStatus).Nou || task.status == T(mariana.util.SpecificationStatus).Inceput}"
+                                                                                                                   class="btn btn-success" style="width: 80px;" type="button" th:text="Terminat"></input></a>
+                                            </div>
+                                            <div th:text="${task.status}"></div>
+                                        </div>-->
+                                    </div>
+
+                                    <div class="priority low"><span>Prioritate scazuta</span></div>
+
+                                    <div class="task low" th:each="task : ${taskLow}">
+                                        <div class="desc">
+                                            <div class="title" th:text="${task.name}"></div>
+                                            <div th:text="${task.description}"></div>
+                                        </div>
+                                        <!--<div class="time">
+                                            <div class="date">
+                                                <a th:href="@{/project/specification/inprogress/__${task.id}__}"> <input th:if="${task.status == T(mariana.util.SpecificationStatus).Nou}"
+                                                                                                                         class="btn btn-primary" style="width: 80px;" type="button" th:text="Inceput"></input></a>
+                                                <a th:href="@{/project/specification/done/__${task.id}__}"> <input th:if="${task.status == T(mariana.util.SpecificationStatus).Nou || task.status == T(mariana.util.SpecificationStatus).Inceput}"
+                                                                                                                   class="btn btn-success" style="width: 80px;" type="button" th:text="Terminat"></input></a>
+                                            </div>
+                                            <div th:text="${task.status}"></div>
+                                        </div>-->
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                </div>
                             </div>
                             <div class="tab-pane" id="custom">
                                 <p th:text="${project.description}">

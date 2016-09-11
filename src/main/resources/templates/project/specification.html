@@ -26,7 +26,7 @@
             <div class="row-fluid sortable">
                 <div class="box span12">
                     <div class="box-header">
-                        <h2><i class="halflings-icon white edit"></i><span class="break"></span>Profilul meu</h2>
+                        <h2><i class="halflings-icon white edit"></i><span class="break"></span>Adauga o noua specificatie!</h2>
                         <div class="box-icon">
                             <a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
                             <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
@@ -34,55 +34,44 @@
                         </div>
                     </div>
                     <div class="box-content">
-                        <form class="form-horizontal" enctype="multipart/form-data" method="post" th:object="${profile}" th:action="@{/user/profile/save}">
+                        <form class="form-horizontal" method="post" th:object="${specification}" th:action="@{/project/specification/save}">
                             <fieldset>
+                                <input type="hidden" th:field="*{projectId}"/>
                                 <div class="control-group">
-                                    <label class="control-label" for="username">Username</label>
+                                    <label class="control-label" for="name">Nume</label>
                                     <div class="controls">
-                                        <input class="input-xlarge focused" id="username" type="text" th:field="*{username}" disabled="true"/>
+                                        <input class="input-xlarge focused" id="name" type="text" th:field="*{name}"/>
                                     </div>
                                 </div>
 
-                               <!-- <div class="control-group">
-                                    <label class="control-label" for="picture">Poza </label>
-                                    <div class="controls">
-                                        <input class="input-xlarge focused" id="picture" type="file" name="picture"/>
-                                    </div>
-                                </div>-->
-
                                 <div class="control-group">
-                                    <label class="control-label" for="new-password">Parola noua</label>
+                                    <label class="control-label" for="hours">Ore de lucru</label>
                                     <div class="controls">
-                                        <input type="password" class="input-xlarge focused" id="new-password" th:field="*{newPassword}"/>
+                                        <input class="input-xlarge focused" id="hours" type="text" th:field="*{workHours}"/>
                                     </div>
-                                    <div id="new-passwordError"
-                                         th:if="${#fields.hasErrors('newPassword')}"
-                                         th:errors="*{newPassword}" style="color: red"></div>
+
                                 </div>
 
                                 <div class="control-group">
-                                    <label class="control-label" for="repeat-password">Repeta parola</label>
+                                    <label class="control-label" for="description">Descriere</label>
                                     <div class="controls">
-                                        <input type="password" class="input-xlarge focused" id="repeat-password" th:field="*{repeatPassword}"/>
+                                        <textarea class="focused" id="description" th:field="*{description}">
+                                            </textarea>
                                     </div>
-                                    <div id="endDateError"
-                                         th:if="${#fields.hasErrors('repeatPassword')}"
-                                         th:errors="*{repeatPassword}" style="color: red"></div>
                                 </div>
-<!--
+
                                 <div class="control-group">
-                                    <label class="control-label" for="old-password">Parola actuala</label>
+                                    <label class="control-label">Prioritate</label>
                                     <div class="controls">
-                                        <input class="input-xlarge focused" id="old-password" type="text" th:field="*{oldPassword}"/>
+                                        <select id="status" th:field="*{priority}">
+                                            <option th:each="priority : ${priorities}" th:value="${priority}"  th:text="${priority}"></option>
+                                        </select>
                                     </div>
-                                    <div id="hoursError"
-                                         th:if="${#fields.hasErrors('oldPassword')}"
-                                         th:errors="*{oldPassword}" style="color: red"></div>
-                                </div>-->
+                                </div>
 
                                 <div class="form-actions">
                                     <button type="submit" class="btn btn-primary">Salveaza</button>
-                                   <a th:href="@{/}"><input class="btn btn-default" type="button" th:value="Renunta"></input></a>
+                                    <a th:href="@{/project/list}"><input class="btn btn-default" type="button" th:value="Renunta"></input></a>
                                 </div>
                             </fieldset>
                         </form>

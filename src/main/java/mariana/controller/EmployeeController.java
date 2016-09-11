@@ -43,7 +43,7 @@ public class EmployeeController extends BaseController {
 
 	@RequestMapping(value = "/list")
 	public String employeeList(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
-							  @RequestParam(value = "size", defaultValue = "2") int size){
+							  @RequestParam(value = "size", defaultValue = "5") int size){
 		model.addAttribute("page", employeeService.getEmployeeList(new PageRequest(page, size)));
 		return "employee/list";
 	}

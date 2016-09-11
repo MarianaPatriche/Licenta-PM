@@ -69,7 +69,7 @@ public class ProjectService {
     }
 
     public List<ProjectIdNameModel> getNotEndedProjectIdNameList(){
-        List<Project> projectList = projectRepository.findByStatusNot(ProjectStatus.ENDED);
+        List<Project> projectList = projectRepository.findByStatusNot(ProjectStatus.Terminat);
         List<ProjectIdNameModel> projectModelList = new ArrayList<>();
 
         for(Project project : projectList){

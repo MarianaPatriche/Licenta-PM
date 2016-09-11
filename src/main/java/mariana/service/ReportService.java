@@ -1,5 +1,6 @@
 package mariana.service;
 
+import mariana.repository.WorkDayRepository;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -34,15 +36,18 @@ public class ReportService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReportService.class);
 
 	//@Value("${report.path}")
-	private String path = "/home/Desktop";
+	private String path = "/home/mariana/Desktop";
 
 	@Autowired
 	private CreateReportService createReportService;
 
+	@Autowired
+	private WorkDayRepository workDayRepository;
 
-	private ReportModel generateReportForBaseRequest(/*BaseFilter filter,*/ PageRequest pageRequest) {
+
+	private ReportModel generateReportForBaseRequest(String username, LocalDate startDate, LocalDate endDate) {
 		LOGGER.info("Generate report!");
-		return ReportMapper.mapReportForBaseRequest(/*baseRequestRepository.findAll(new FilterBuilder(filter).build(), pageRequest).getContent()*/);
+		return ReportMapper.mapReportForBaseRequest(workDayRepository.findByEmployeeUserUsernameAndDayBetween(username, startDate, endDate));
 	}
 
 	private String saveReport(final ReportModel report) throws IOException {
@@ -63,8 +68,8 @@ public class ReportService {
 		return savePath;
 	}
 
-	public String generateAndSaveReportForBaseRequest(/*BaseFilter filter,*/ PageRequest pageRequest) {
-		final ReportModel report = generateReportForBaseRequest(/*filter,*/ pageRequest);
+	public String generateAndSaveReportForBaseRequest(String username, LocalDate startDate, LocalDate endDate) {
+		final ReportModel report = generateReportForBaseRequest(username, startDate, endDate);
 		String savePath = "";
 		try {
 			savePath = saveReport(report);

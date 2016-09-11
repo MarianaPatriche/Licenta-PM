@@ -63,14 +63,14 @@
                                     <td th:text="${#temporals.format(project.startDate, 'dd/MM/yyyy')}"></td>
                                     <td th:text="${#temporals.format(project.endDate, 'dd/MM/yyyy')}"></td>
                                     <td class="center">
-                                        <span th:if="${#strings.toString(project.status) == 'STARTED'}"
-                                              class="label label-success">STARTED</span>
-                                        <span th:if="${#strings.toString(project.status) == 'MAINTENANCE'}"
-                                              class="label label-danger">MAINTENANCE</span>
-                                        <span th:if="${#strings.toString(project.status) == 'DELAYED'}"
-                                              class="label label-warning">DELAYED</span>
-                                        <span th:if="${#strings.toString(project.status) == 'ENDED'}"
-                                              class="label">ENDED</span>
+                                        <span th:if="${#strings.toString(project.status) == 'Inceput'}"
+                                              class="label label-success">Inceput</span>
+                                        <span th:if="${#strings.toString(project.status) == 'Mentenanta'}"
+                                              class="label label-danger">Mentenanta</span>
+                                        <span th:if="${#strings.toString(project.status) == 'Amanat'}"
+                                              class="label label-warning">Amanat</span>
+                                        <span th:if="${#strings.toString(project.status) == 'Terminat'}"
+                                              class="label">Terminat</span>
                                     </td>
                                     <td th:text="${project.hours}"></td>
                                     <td th:text="${project.description}"></td>
@@ -83,6 +83,10 @@
                                         </a>
                                         <a class="btn btn-info"
                                            th:href="@{/project/form/__${project.id}__}">
+                                            <i class="halflings-icon white edit"></i>
+                                        </a>
+                                        <a class="btn btn-warning"
+                                           th:href="@{/project/specification/__${project.id}__}">
                                             <i class="halflings-icon white edit"></i>
                                         </a>
                                     </td>

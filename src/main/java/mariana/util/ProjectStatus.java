@@ -4,20 +4,20 @@ package mariana.util;
  * Created by mariana on 02.06.2016.
  */
 public enum ProjectStatus {
-    STARTED, ENDED, DELAYED, MAINTENANCE;
+    Inceput, Terminat, Amanat, Mentenanta;
 
-    @Override
+   /* @Override
     public String toString() {
         switch (this){
-            case STARTED:
+            case Inceput:
                 return "Inceput";
-            case ENDED:
+            case Terminat:
                 return "Finalizat";
-            case DELAYED:
+            case Amanat:
                 return "Intarziat";
-            case MAINTENANCE:
+            case Mentenanta:
                 return "Mentenanta";
             default:
                 return "Nu s-a gasit status!";
-        }
-}}
+        }*/
+}
